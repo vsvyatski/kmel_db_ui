@@ -5,6 +5,9 @@
     <file alias="open">images/open.png</file>
     <file alias="refresh">images/refresh.png</file>
   </qresource>
+  <qresource prefix="/images">
+    <file alias="usbFlash">images/usbFlash.png</file>
+  </qresource>
   <qresource prefix="/icons">
     <file alias="applicationIcon">images/applicationIcon.svg</file>
   </qresource>
