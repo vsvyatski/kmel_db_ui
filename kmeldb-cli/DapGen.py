@@ -38,7 +38,7 @@ elif sys.platform == 'win32':
 log = logging.getLogger(__name__)
 
 __all__ = []
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 __date__ = '2014-05-12'
 __updated__ = '2019-02-23'
 
