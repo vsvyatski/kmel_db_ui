@@ -1,2 +1,6 @@
 # kmel_db_ui
-This is a Qt 5 based UI for kmel_db.
+
+A UI for the parser and generator for Kenwood Music Editor Light databases created by [Chris Willoughby](https://github.com/chrrrisw). I have actually forked it [here](https://github.com/vsvyatski/kmel_db) and added some improvements. The UI is based on [PyQt5](https://www.riverbankcomputing.com/software/pyqt/intro).
+
+## Requirements
+They are the same as for kmel_db plus PyQt5.
