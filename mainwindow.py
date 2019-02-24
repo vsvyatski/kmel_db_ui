@@ -2,7 +2,9 @@ from ui_mainwindow import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QWidget
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
 import driveutils
-from PyQt5.QtCore import pyqtSlot, QItemSelection
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt
+import subprocess
+import os
 
 
 class MainWindow(QMainWindow):
@@ -39,3 +41,29 @@ class MainWindow(QMainWindow):
     @pyqtSlot(QItemSelection, QItemSelection)
     def __driveListSelectionChanged(self, selected: QItemSelection, deselected: QItemSelection):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
+
+    @pyqtSlot()
+    def viewActionTriggered(self):
+        selection_model = self.__ui.driveList.selectionModel()
+        if not selection_model.hasSelection():
+            return
+
+        model_index = selection_model.selectedIndexes()[0]
+        drive_mount_point = model_index.data(Qt.UserRole + 1)
+
+        # We are going to try several known file managers if they are available. If any of them cannot be found,
+        # then we'll just use xdg-open (but this will not select the file).
+        cmd_list = None
+        for file_manager in ['dolphin', 'nemo', 'nautilus']:
+            path_to_file_manager = os.path.join('/usr/bin', file_manager)
+            if os.access(path_to_file_manager, os.X_OK):
+                args = [path_to_file_manager, os.path.join(drive_mount_point, 'kenwood.dap')]
+                if file_manager == 'dolphin':
+                    args.insert(1, '--select')
+                cmd_list = args
+                break
+
+        if cmd_list is None:
+            cmd_list = ['xdg-open', drive_mount_point]
+
+        subprocess.Popen(cmd_list)
