@@ -2,7 +2,7 @@ from ui_mainwindow import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QWidget
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
 import driveutils
-from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
 import subprocess
 import os
 
@@ -67,3 +67,15 @@ class MainWindow(QMainWindow):
             cmd_list = ['xdg-open', drive_mount_point]
 
         subprocess.Popen(cmd_list)
+
+    @pyqtSlot(QPoint)
+    def terminalLogCustomContextMenuRequested(self, pos: QPoint):
+        custom_menu = self.__ui.terminalLogWindow.createStandardContextMenu(pos)
+        custom_menu.addSeparator()
+        custom_menu.addAction(self.__ui.actionClearLog)
+
+        custom_menu.exec(self.__ui.terminalLogWindow.mapToGlobal(pos))
+
+    @pyqtSlot()
+    def clearLogActionTriggered(self):
+        self.__ui.terminalLogWindow.clear()

@@ -170,6 +170,9 @@
             <height>0</height>
            </size>
           </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
+          </property>
           <property name="documentTitle">
            <string/>
           </property>
@@ -275,6 +278,15 @@
     <string>About</string>
    </property>
   </action>
+  <action name="actionClearLog">
+   <property name="icon">
+    <iconset resource="../appresources.qrc">
+     <normaloff>:/actions/clear</normaloff>:/actions/clear</iconset>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../appresources.qrc"/>
@@ -312,9 +324,43 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>terminalLogWindow</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>terminalLogCustomContextMenuRequested(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>376</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionClearLog</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clearLogActionTriggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>refreshActionTriggered()</slot>
   <slot>viewActionTriggered()</slot>
+  <slot>terminalLogCustomContextMenuRequested(QPoint)</slot>
+  <slot>clearLogActionTriggered()</slot>
  </slots>
 </ui>

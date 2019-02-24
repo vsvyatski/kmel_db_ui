@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/actions">
+    <file alias="clear">images/clear.png</file>
     <file alias="write">images/write.png</file>
     <file alias="about">images/about.png</file>
     <file alias="open">images/open.png</file>
