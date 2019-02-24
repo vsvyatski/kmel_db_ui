@@ -141,6 +141,7 @@ class Ui_MainWindow(object):
         self.actionView.triggered.connect(MainWindow.viewActionTriggered)
         self.terminalLogWindow.customContextMenuRequested['QPoint'].connect(MainWindow.terminalLogCustomContextMenuRequested)
         self.actionClearLog.triggered.connect(MainWindow.clearLogActionTriggered)
+        self.actionGenerate.triggered.connect(MainWindow.generateActionTriggered)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

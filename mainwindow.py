@@ -5,6 +5,9 @@ import driveutils
 from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
 import subprocess
 import os
+import sys
+import asyncqt
+import asyncio
 
 
 class MainWindow(QMainWindow):
@@ -42,14 +45,19 @@ class MainWindow(QMainWindow):
     def __driveListSelectionChanged(self, selected: QItemSelection, deselected: QItemSelection):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
 
-    @pyqtSlot()
-    def viewActionTriggered(self):
+    def __get_selected_drive_mount_point(self):
         selection_model = self.__ui.driveList.selectionModel()
         if not selection_model.hasSelection():
-            return
+            return None
 
         model_index = selection_model.selectedIndexes()[0]
-        drive_mount_point = model_index.data(Qt.UserRole + 1)
+        return model_index.data(Qt.UserRole + 1)
+
+    @pyqtSlot()
+    def viewActionTriggered(self):
+        drive_mount_point = self.__get_selected_drive_mount_point()
+        if drive_mount_point is None:
+            return
 
         # We are going to try several known file managers if they are available. If any of them cannot be found,
         # then we'll just use xdg-open (but this will not select the file).
@@ -79,3 +87,24 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def clearLogActionTriggered(self):
         self.__ui.terminalLogWindow.clear()
+
+    @asyncqt.asyncSlot()
+    async def generateActionTriggered(self):
+        drive_mount_point = self.__get_selected_drive_mount_point()
+        if drive_mount_point is None:
+            return
+
+        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
+
+        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path,
+                                                                  stdout=asyncio.subprocess.PIPE,
+                                                                  stderr=asyncio.subprocess.PIPE)
+
+        stdout_stream = kmeldb_cli_process.stdout
+        while not stdout_stream.at_eof():
+            data = await stdout_stream.read(64)
+            text = data.decode('ascii').rstrip()
+            # TODO: insert or append text properly treating \r and \n and using void QPlainTextEdit::moveCursor
+            self.__ui.terminalLogWindow.appendPlainText(text)
+
+        await kmeldb_cli_process.wait()
