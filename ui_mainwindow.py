@@ -83,6 +83,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.terminalLogWindow.sizePolicy().hasHeightForWidth())
         self.terminalLogWindow.setSizePolicy(sizePolicy)
         self.terminalLogWindow.setMinimumSize(QtCore.QSize(250, 0))
+        self.terminalLogWindow.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.terminalLogWindow.setDocumentTitle("")
         self.terminalLogWindow.setUndoRedoEnabled(False)
         self.terminalLogWindow.setReadOnly(True)
@@ -122,6 +123,11 @@ class Ui_MainWindow(object):
         icon4.addPixmap(QtGui.QPixmap(":/actions/about"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionAbout.setIcon(icon4)
         self.actionAbout.setObjectName("actionAbout")
+        self.actionClearLog = QtWidgets.QAction(MainWindow)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/actions/clear"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionClearLog.setIcon(icon5)
+        self.actionClearLog.setObjectName("actionClearLog")
         self.toolBar.addAction(self.actionRefresh)
         self.toolBar.addAction(self.actionGenerate)
         self.toolBar.addAction(self.actionView)
@@ -133,6 +139,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionRefresh.triggered.connect(MainWindow.refreshActionTriggered)
         self.actionView.triggered.connect(MainWindow.viewActionTriggered)
+        self.terminalLogWindow.customContextMenuRequested['QPoint'].connect(MainWindow.terminalLogCustomContextMenuRequested)
+        self.actionClearLog.triggered.connect(MainWindow.clearLogActionTriggered)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -148,5 +156,6 @@ class Ui_MainWindow(object):
         self.actionView.setText(_translate("MainWindow", "View"))
         self.actionView.setToolTip(_translate("MainWindow", "Show Database on Drive"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
+        self.actionClearLog.setText(_translate("MainWindow", "Clear"))
 
 import appresources_rc
