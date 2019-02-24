@@ -53,6 +53,7 @@ class Ui_MainWindow(object):
         self.driveList.setSizePolicy(sizePolicy)
         self.driveList.setMinimumSize(QtCore.QSize(0, 0))
         self.driveList.setBaseSize(QtCore.QSize(0, 0))
+        self.driveList.setIconSize(QtCore.QSize(24, 24))
         self.driveList.setObjectName("driveList")
         self.driveListLayout.addWidget(self.driveList)
         self.terminalLogContainer = QtWidgets.QWidget(self.splitter)
@@ -130,6 +131,8 @@ class Ui_MainWindow(object):
         self.terminalLogLabel.setBuddy(self.terminalLogWindow)
 
         self.retranslateUi(MainWindow)
+        self.actionRefresh.triggered.connect(MainWindow.refreshActionTriggered)
+        self.actionView.triggered.connect(MainWindow.viewActionTriggered)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
