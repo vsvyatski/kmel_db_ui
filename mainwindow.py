@@ -136,8 +136,11 @@ class MainWindow(QMainWindow):
 
     @asyncqt.asyncSlot()
     async def generateActionTriggered(self):
+        self.__uiBeginGenerateOperation()
+
         drive_mount_point = self.__get_selected_drive_mount_point()
         if drive_mount_point is None:
+            self.__uiEndGenerateOperation()
             return
 
         text_cursor = self.__ui.terminalLogWindow.textCursor()
@@ -156,3 +159,11 @@ class MainWindow(QMainWindow):
         self.__ui.terminalLogWindow.ensureCursorVisible()
 
         await kmeldb_cli_process.wait()
+
+        self.__uiEndGenerateOperation()
+
+    def __uiBeginGenerateOperation(self):
+        self.__ui.actionGenerate.setEnabled(False)
+
+    def __uiEndGenerateOperation(self):
+        self.__ui.actionGenerate.setEnabled(True)
