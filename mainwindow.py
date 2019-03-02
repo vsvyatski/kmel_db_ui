@@ -101,9 +101,24 @@ class MainWindow(QMainWindow):
                                                                   stderr=asyncio.subprocess.PIPE)
 
         stdout_stream = kmeldb_cli_process.stdout
-        while not stdout_stream.at_eof():
-            data = await stdout_stream.read(64)
-            text = data.decode('ascii').rstrip()
+        leftover_data = bytearray()
+        while not stdout_stream.at_eof() or len(leftover_data) > 0:
+            separator_encountered = False
+            while not separator_encountered:
+                leftover_data += await stdout_stream.read(64)
+                separator_index = -1
+                for index, b in enumerate(leftover_data):
+                    if b == ord(b'\r') or b == ord(b'\n'):
+                        separator_index = index
+                        break
+                if separator_index != -1:
+                    separator_encountered = True
+                    meaningful_data = leftover_data[0:separator_index]
+                    leftover_data = leftover_data[separator_index + 1:]
+                else:
+                    leftover_data += leftover_data[separator_index + 1:]
+
+            text = meaningful_data.decode()
             # TODO: insert or append text properly treating \r and \n and using void QPlainTextEdit::moveCursor
             self.__ui.terminalLogWindow.appendPlainText(text)
 
