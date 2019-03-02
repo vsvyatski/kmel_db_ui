@@ -1,6 +1,6 @@
 from ui_mainwindow import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QWidget
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor
 import driveutils
 from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
 import subprocess
@@ -94,9 +94,12 @@ class MainWindow(QMainWindow):
         if drive_mount_point is None:
             return
 
-        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
+        text_cursor = self.__ui.terminalLogWindow.textCursor()
 
-        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path,
+        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
+        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dapgen_path, drive_mount_point))
+
+        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path, drive_mount_point,
                                                                   stdout=asyncio.subprocess.PIPE,
                                                                   stderr=asyncio.subprocess.PIPE)
 
@@ -104,12 +107,20 @@ class MainWindow(QMainWindow):
         leftover_data = bytearray()
         while not stdout_stream.at_eof() or len(leftover_data) > 0:
             separator_encountered = False
+            meaningful_data = None
+            cr_found = False
+            lf_found = False
             while not separator_encountered:
                 leftover_data += await stdout_stream.read(64)
                 separator_index = -1
                 for index, b in enumerate(leftover_data):
-                    if b == ord(b'\r') or b == ord(b'\n'):
+                    if b == ord(b'\r'):
                         separator_index = index
+                        cr_found = True
+                        break
+                    elif b == ord(b'\n'):
+                        separator_index = index
+                        lf_found = True
                         break
                 if separator_index != -1:
                     separator_encountered = True
@@ -118,8 +129,21 @@ class MainWindow(QMainWindow):
                 else:
                     leftover_data += leftover_data[separator_index + 1:]
 
-            text = meaningful_data.decode()
-            # TODO: insert or append text properly treating \r and \n and using void QPlainTextEdit::moveCursor
-            self.__ui.terminalLogWindow.appendPlainText(text)
+            text = meaningful_data.decode() if meaningful_data is not None else ''
+
+            if cr_found:
+                text_cursor.movePosition(QTextCursor.StartOfLine)
+                text_cursor.insertText(text)
+                i = 1
+                count = len(text)
+                while i <= count:
+                    text_cursor.deleteChar()
+                    i += 1
+            elif lf_found:
+                text_cursor.insertText(text + '\n')
+            else:
+                text_cursor.insertText(text)
+
+        text_cursor.insertText('\n\n')
 
         await kmeldb_cli_process.wait()
