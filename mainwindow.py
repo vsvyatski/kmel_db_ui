@@ -1,10 +1,13 @@
 from ui_mainwindow import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QWidget
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor
 import driveutils
 from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
 import subprocess
 import os
+import sys
+import asyncqt
+import asyncio
 
 
 class MainWindow(QMainWindow):
@@ -42,14 +45,19 @@ class MainWindow(QMainWindow):
     def __driveListSelectionChanged(self, selected: QItemSelection, deselected: QItemSelection):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
 
-    @pyqtSlot()
-    def viewActionTriggered(self):
+    def __get_selected_drive_mount_point(self):
         selection_model = self.__ui.driveList.selectionModel()
         if not selection_model.hasSelection():
-            return
+            return None
 
         model_index = selection_model.selectedIndexes()[0]
-        drive_mount_point = model_index.data(Qt.UserRole + 1)
+        return model_index.data(Qt.UserRole + 1)
+
+    @pyqtSlot()
+    def viewActionTriggered(self):
+        drive_mount_point = self.__get_selected_drive_mount_point()
+        if drive_mount_point is None:
+            return
 
         # We are going to try several known file managers if they are available. If any of them cannot be found,
         # then we'll just use xdg-open (but this will not select the file).
@@ -79,3 +87,83 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def clearLogActionTriggered(self):
         self.__ui.terminalLogWindow.clear()
+
+    async def __read_and_print_stream(self, sr: asyncio.StreamReader, text_cursor: QTextCursor):
+        leftover_data = bytearray()
+        while not sr.at_eof() or len(leftover_data) > 0:
+            separator_encountered = False
+            meaningful_data = None
+            cr_found = False
+            lf_found = False
+            while not separator_encountered:
+                leftover_data += await sr.read(64)
+                separator_index = -1
+                for index, b in enumerate(leftover_data):
+                    if b == ord(b'\r'):
+                        separator_index = index
+                        cr_found = True
+                        break
+                    elif b == ord(b'\n'):
+                        separator_index = index
+                        lf_found = True
+                        break
+                if separator_index != -1:
+                    separator_encountered = True
+                    meaningful_data = leftover_data[0:separator_index]
+                    leftover_data = leftover_data[separator_index + 1:]
+                else:
+                    leftover_data += leftover_data[separator_index + 1:]
+
+            text = meaningful_data.decode() if meaningful_data is not None else ''
+
+            text_cursor.beginEditBlock()
+
+            if cr_found:
+                text_cursor.movePosition(QTextCursor.StartOfLine)
+                text_cursor.insertText(text)
+                i = 1
+                count = len(text)
+                while i <= count:
+                    text_cursor.deleteChar()
+                    i += 1
+            elif lf_found:
+                text_cursor.insertText(text + '\n')
+            else:
+                text_cursor.insertText(text)
+
+            text_cursor.endEditBlock()
+            self.__ui.terminalLogWindow.ensureCursorVisible()
+
+    @asyncqt.asyncSlot()
+    async def generateActionTriggered(self):
+        self.__uiBeginGenerateOperation()
+
+        drive_mount_point = self.__get_selected_drive_mount_point()
+        if drive_mount_point is None:
+            self.__uiEndGenerateOperation()
+            return
+
+        text_cursor = self.__ui.terminalLogWindow.textCursor()
+
+        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
+        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dapgen_path, drive_mount_point))
+
+        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path, drive_mount_point,
+                                                                  stdout=asyncio.subprocess.PIPE,
+                                                                  stderr=asyncio.subprocess.PIPE)
+
+        await self.__read_and_print_stream(kmeldb_cli_process.stdout, text_cursor)
+        text_cursor.insertText('\n')
+        await self.__read_and_print_stream(kmeldb_cli_process.stderr, text_cursor)
+        text_cursor.insertText('\n')
+        self.__ui.terminalLogWindow.ensureCursorVisible()
+
+        await kmeldb_cli_process.wait()
+
+        self.__uiEndGenerateOperation()
+
+    def __uiBeginGenerateOperation(self):
+        self.__ui.actionGenerate.setEnabled(False)
+
+    def __uiEndGenerateOperation(self):
+        self.__ui.actionGenerate.setEnabled(True)
