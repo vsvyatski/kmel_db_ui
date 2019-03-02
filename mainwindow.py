@@ -88,30 +88,15 @@ class MainWindow(QMainWindow):
     def clearLogActionTriggered(self):
         self.__ui.terminalLogWindow.clear()
 
-    @asyncqt.asyncSlot()
-    async def generateActionTriggered(self):
-        drive_mount_point = self.__get_selected_drive_mount_point()
-        if drive_mount_point is None:
-            return
-
-        text_cursor = self.__ui.terminalLogWindow.textCursor()
-
-        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
-        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dapgen_path, drive_mount_point))
-
-        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path, drive_mount_point,
-                                                                  stdout=asyncio.subprocess.PIPE,
-                                                                  stderr=asyncio.subprocess.PIPE)
-
-        stdout_stream = kmeldb_cli_process.stdout
+    async def __read_and_print_stream(self, sr: asyncio.StreamReader, text_cursor: QTextCursor):
         leftover_data = bytearray()
-        while not stdout_stream.at_eof() or len(leftover_data) > 0:
+        while not sr.at_eof() or len(leftover_data) > 0:
             separator_encountered = False
             meaningful_data = None
             cr_found = False
             lf_found = False
             while not separator_encountered:
-                leftover_data += await stdout_stream.read(64)
+                leftover_data += await sr.read(64)
                 separator_index = -1
                 for index, b in enumerate(leftover_data):
                     if b == ord(b'\r'):
@@ -131,6 +116,8 @@ class MainWindow(QMainWindow):
 
             text = meaningful_data.decode() if meaningful_data is not None else ''
 
+            text_cursor.beginEditBlock()
+
             if cr_found:
                 text_cursor.movePosition(QTextCursor.StartOfLine)
                 text_cursor.insertText(text)
@@ -144,6 +131,28 @@ class MainWindow(QMainWindow):
             else:
                 text_cursor.insertText(text)
 
-        text_cursor.insertText('\n\n')
+            text_cursor.endEditBlock()
+            self.__ui.terminalLogWindow.ensureCursorVisible()
+
+    @asyncqt.asyncSlot()
+    async def generateActionTriggered(self):
+        drive_mount_point = self.__get_selected_drive_mount_point()
+        if drive_mount_point is None:
+            return
+
+        text_cursor = self.__ui.terminalLogWindow.textCursor()
+
+        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
+        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dapgen_path, drive_mount_point))
+
+        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path, drive_mount_point,
+                                                                  stdout=asyncio.subprocess.PIPE,
+                                                                  stderr=asyncio.subprocess.PIPE)
+
+        await self.__read_and_print_stream(kmeldb_cli_process.stdout, text_cursor)
+        text_cursor.insertText('\n')
+        await self.__read_and_print_stream(kmeldb_cli_process.stderr, text_cursor)
+        text_cursor.insertText('\n')
+        self.__ui.terminalLogWindow.ensureCursorVisible()
 
         await kmeldb_cli_process.wait()
