@@ -3,6 +3,7 @@ import glob
 import os
 
 subprocess.run(['pyuic5', '-o', '../ui_mainwindow.py', '../forms/mainwindow.ui'])
+subprocess.run(['pyuic5', '-o', '../ui_aboutdialog.py', '../forms/aboutdialog.ui'])
 
 subprocess.run(['pyrcc5', '-o', '../appresources_rc.py', '../appresources.qrc'])
 

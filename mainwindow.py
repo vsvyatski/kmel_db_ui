@@ -8,6 +8,7 @@ import os
 import sys
 import asyncqt
 import asyncio
+import aboutdialog
 
 
 class MainWindow(QMainWindow):
@@ -45,7 +46,7 @@ class MainWindow(QMainWindow):
     def __driveListSelectionChanged(self, selected: QItemSelection, deselected: QItemSelection):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
 
-    def __get_selected_drive_mount_point(self):
+    def __getSelectedDriveMountPoint(self):
         selection_model = self.__ui.driveList.selectionModel()
         if not selection_model.hasSelection():
             return None
@@ -55,7 +56,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def viewActionTriggered(self):
-        drive_mount_point = self.__get_selected_drive_mount_point()
+        drive_mount_point = self.__getSelectedDriveMountPoint()
         if drive_mount_point is None:
             return
 
@@ -88,7 +89,7 @@ class MainWindow(QMainWindow):
     def clearLogActionTriggered(self):
         self.__ui.terminalLogWindow.clear()
 
-    async def __read_and_print_stream(self, sr: asyncio.StreamReader, text_cursor: QTextCursor):
+    async def __readAndPrintStream(self, sr: asyncio.StreamReader, text_cursor: QTextCursor):
         leftover_data = bytearray()
         while not sr.at_eof() or len(leftover_data) > 0:
             separator_encountered = False
@@ -138,7 +139,7 @@ class MainWindow(QMainWindow):
     async def generateActionTriggered(self):
         self.__uiBeginGenerateOperation()
 
-        drive_mount_point = self.__get_selected_drive_mount_point()
+        drive_mount_point = self.__getSelectedDriveMountPoint()
         if drive_mount_point is None:
             self.__uiEndGenerateOperation()
             return
@@ -152,9 +153,9 @@ class MainWindow(QMainWindow):
                                                                   stdout=asyncio.subprocess.PIPE,
                                                                   stderr=asyncio.subprocess.PIPE)
 
-        await self.__read_and_print_stream(kmeldb_cli_process.stdout, text_cursor)
+        await self.__readAndPrintStream(kmeldb_cli_process.stdout, text_cursor)
         text_cursor.insertText('\n')
-        await self.__read_and_print_stream(kmeldb_cli_process.stderr, text_cursor)
+        await self.__readAndPrintStream(kmeldb_cli_process.stderr, text_cursor)
         text_cursor.insertText('\n')
         self.__ui.terminalLogWindow.ensureCursorVisible()
 
@@ -167,3 +168,8 @@ class MainWindow(QMainWindow):
 
     def __uiEndGenerateOperation(self):
         self.__ui.actionGenerate.setEnabled(True)
+
+    @pyqtSlot()
+    def aboutActionTriggered(self):
+        about_box = aboutdialog.AboutDialog(self)
+        about_box.exec()
