@@ -372,6 +372,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionAbout</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>aboutActionTriggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>refreshActionTriggered()</slot>
@@ -379,5 +395,6 @@
   <slot>terminalLogCustomContextMenuRequested(QPoint)</slot>
   <slot>clearLogActionTriggered()</slot>
   <slot>generateActionTriggered()</slot>
+  <slot>aboutActionTriggered()</slot>
  </slots>
 </ui>
