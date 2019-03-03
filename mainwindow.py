@@ -9,6 +9,7 @@ import sys
 import asyncqt
 import asyncio
 import aboutdialog
+import info
 
 
 class MainWindow(QMainWindow):
@@ -146,7 +147,7 @@ class MainWindow(QMainWindow):
 
         text_cursor = self.__ui.terminalLogWindow.textCursor()
 
-        dapgen_path = os.path.join(os.path.dirname(__file__), 'kmeldb_cli/DapGen.py')
+        dapgen_path = os.path.join(info.APP_DIR, 'kmeldb_cli/DapGen.py')
         text_cursor.insertText('{} {} {}\n'.format(sys.executable, dapgen_path, drive_mount_point))
 
         kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path, drive_mount_point,
