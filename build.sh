@@ -83,6 +83,7 @@ cp "$currentDir/LICENSE" "$outDir"
 
 echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
+"$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
 
 if [ ${pack} = true ]
 then
