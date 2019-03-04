@@ -1,5 +1,5 @@
-import os
 import glob
+import os
 from typing import List
 
 import kmeldb_cli.kmeldb.mounts
@@ -39,8 +39,8 @@ class UsbDriveInfo:
 
 
 def is_usb_device(device_path: str) -> bool:
-    for devlink in glob.glob('/dev/disk/by-id/usb*'):
-        if os.path.realpath(devlink) == device_path:
+    for dev_link in glob.glob('/dev/disk/by-id/usb*'):
+        if os.path.realpath(dev_link) == device_path:
             return True
     return False
 
