@@ -53,6 +53,8 @@ class Ui_MainWindow(object):
         self.driveList.setSizePolicy(sizePolicy)
         self.driveList.setMinimumSize(QtCore.QSize(0, 0))
         self.driveList.setBaseSize(QtCore.QSize(0, 0))
+        self.driveList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.driveList.setProperty("showDropIndicator", False)
         self.driveList.setIconSize(QtCore.QSize(24, 24))
         self.driveList.setObjectName("driveList")
         self.driveListLayout.addWidget(self.driveList)

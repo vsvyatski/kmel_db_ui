@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 import asyncqt
-from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent
 from PyQt5.QtWidgets import QMainWindow, QWidget
 
@@ -13,6 +13,8 @@ import driveutils
 import info
 import settings
 from ui_mainwindow import Ui_MainWindow
+
+_translate = QCoreApplication.translate
 
 
 class MainWindow(QMainWindow):
@@ -163,9 +165,10 @@ class MainWindow(QMainWindow):
         text_cursor.insertText('\n')
         await self.__readAndPrintStream(kmeldb_cli_process.stderr, text_cursor)
         text_cursor.insertText('\n')
-        self.__ui.terminalLogWindow.ensureCursorVisible()
 
-        await kmeldb_cli_process.wait()
+        exit_code = await kmeldb_cli_process.wait()
+        text_cursor.insertText(_translate('MainWindow', 'Process finished with exit code %d\n\n') % exit_code)
+        self.__ui.terminalLogWindow.ensureCursorVisible()
 
         self.__uiEndGenerateOperation()
 
