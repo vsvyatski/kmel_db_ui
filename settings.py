@@ -1,4 +1,5 @@
 from PyQt5.QtCore import QSettings, QByteArray, QObject
+
 import info
 
 
@@ -21,6 +22,8 @@ class ApplicationSettings(QObject):
         self.__settings.setValue('MainWindow', self.__main_window_geometry)
         self.__settings.setValue('SplitterState', self.__main_window_splitter_state)
         self.__settings.endGroup()
+
+        self.__settings.sync()
 
     @property
     def main_window_geometry(self) -> QByteArray:

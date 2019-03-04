@@ -1,15 +1,18 @@
-from ui_mainwindow import Ui_MainWindow
-from PyQt5.QtWidgets import QMainWindow, QWidget
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor
-import driveutils
-from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
-import subprocess
-import os
-import sys
-import asyncqt
 import asyncio
+import os
+import subprocess
+import sys
+
+import asyncqt
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent
+from PyQt5.QtWidgets import QMainWindow, QWidget
+
 import aboutdialog
+import driveutils
 import info
+import settings
+from ui_mainwindow import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
@@ -24,6 +27,8 @@ class MainWindow(QMainWindow):
         self.__ui.driveList.selectionModel().selectionChanged.connect(self.__driveListSelectionChanged)
 
         self.__loadUsbDrivesIntoView()
+
+        self.__app_settings: settings.ApplicationSettings = None
 
     def __loadUsbDrivesIntoView(self):
         model: QStandardItemModel = self.__ui.driveList.model()
@@ -174,3 +179,17 @@ class MainWindow(QMainWindow):
     def aboutActionTriggered(self):
         about_box = aboutdialog.AboutDialog(self)
         about_box.exec()
+
+    def useSettingsObject(self, settings: settings.ApplicationSettings):
+        self.__app_settings = settings
+
+        if self.__app_settings.main_window_geometry is not None:
+            self.restoreGeometry(self.__app_settings.main_window_geometry)
+
+        if self.__app_settings.main_window_splitter_state is not None:
+            self.__ui.splitter.restoreState(self.__app_settings.main_window_splitter_state)
+
+    def closeEvent(self, event: QCloseEvent):
+        self.__app_settings.main_window_geometry = self.saveGeometry()
+        self.__app_settings.main_window_splitter_state = self.__ui.splitter.saveState()
+        super().closeEvent(event)
