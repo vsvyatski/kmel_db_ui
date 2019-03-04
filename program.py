@@ -1,16 +1,29 @@
-import sys
-from PyQt5.QtWidgets import QApplication
-from mainwindow import MainWindow
-import asyncqt
 import asyncio
+import sys
+
+import asyncqt
+from PyQt5.QtWidgets import QApplication
+
+import settings
+from mainwindow import MainWindow
 
 if __name__ == '__main__':
-    a = QApplication(sys.argv)
-    loop = asyncqt.QEventLoop(a)
+    app = QApplication(sys.argv)
+    loop = asyncqt.QEventLoop(app)
     asyncio.set_event_loop(loop)
 
-    w = MainWindow()
-    w.show()
+    # Loading settings
+    settings = settings.ApplicationSettings()
+    settings.read()
+
+    main_window = MainWindow()
+    main_window.useSettingsObject(settings)
+    main_window.show()
 
     with loop:
-        sys.exit(loop.run_forever())
+        status = loop.run_forever()
+
+    # Saving settings
+    settings.write()
+
+    sys.exit(status)
