@@ -13,7 +13,7 @@ class Ui_AboutDialog(object):
         AboutDialog.setObjectName("AboutDialog")
         AboutDialog.resize(539, 261)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/applicationIcon"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icons/applicationIcon128"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         AboutDialog.setWindowIcon(icon)
         AboutDialog.setModal(True)
         self.verticalLayout = QtWidgets.QVBoxLayout(AboutDialog)

@@ -10,7 +10,7 @@
     <file alias="usbFlash">images/usbFlash.png</file>
   </qresource>
   <qresource prefix="/icons">
+    <file alias="applicationIcon128">images/applicationIcon128.png</file>
     <file alias="applicationIcon96">images/applicationIcon96.png</file>
-    <file alias="applicationIcon">images/applicationIcon.svg</file>
   </qresource>
 </RCC>
