@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/kmel_db_ui.iml" filepath="$PROJECT_DIR$/.idea/kmel_db_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Kenwood DB Generator.iml" filepath="$PROJECT_DIR$/.idea/Kenwood DB Generator.iml" />
     </modules>
   </component>
 </project>

@@ -59,6 +59,7 @@ done
 currentDir=$(dirname "$0")
 
 outDir="$currentDir/dist/kmeldb-ui"
+srcDir="$currentDir/src"
 if [ ! -d "$outDir" ]
 then
 	mkdir -p "$outDir"
@@ -66,21 +67,22 @@ else
 	rm -r -f "$outDir/"*
 fi
 
-cp -r "$currentDir/kmeldb_cli" "$outDir"
-cp "$currentDir/aboutdialog.py" "$outDir"
-cp "$currentDir/appresources_rc.py" "$outDir"
-cp "$currentDir/driveutils.py" "$outDir"
-cp "$currentDir/info.py" "$outDir"
-cp "$currentDir/kenwooddbgen.png" "$outDir"
-cp "$currentDir/kenwooddbgen.sh" "$outDir"
+echo Copying files...
+cp -r "$srcDir/kmeldb_cli" "$outDir"
+cp "$srcDir/aboutdialog.py" "$outDir"
+cp "$srcDir/appresources_rc.py" "$outDir"
+cp "$srcDir/driveutils.py" "$outDir"
+cp "$srcDir/info.py" "$outDir"
+cp "$srcDir/kenwooddbgen.png" "$outDir"
+cp "$srcDir/kenwooddbgen.sh" "$outDir"
+cp "$srcDir/mainwindow.py" "$outDir"
+cp "$srcDir/program.py" "$outDir"
+cp "$srcDir/settings.py" "$outDir"
+cp "$srcDir/ui_"*.py "$outDir"
 cp "$currentDir/LICENSE" "$outDir"
-cp "$currentDir/mainwindow.py" "$outDir"
-cp "$currentDir/program.py" "$outDir"
-cp "$currentDir/settings.py" "$outDir"
-cp "$currentDir/ui_"*.py "$outDir"
-python3 -m venv --system-site-packages "$outDir/venv"
 
-echo Build has been successful.
+echo Generating virtual environment...
+python3 -m venv --system-site-packages "$outDir/venv"
 
 if [ ${pack} = true ]
 then
@@ -90,3 +92,5 @@ then
     tar -czf "../kmeldb-ui$version_suffix.tar.gz" *
     cd -
 fi
+
+echo Build has been successful.
