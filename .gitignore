@@ -1,4 +1,5 @@
 venv/
+!src/kmeldb_cli/venv/
 __pycache__/
 workspace.xml
 dist/

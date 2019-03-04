@@ -97,7 +97,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>KMEL DB CLI version: 0.2.1</string>
+        <string>KMEL DB CLI version: 0.2.2</string>
        </property>
       </widget>
      </item>
