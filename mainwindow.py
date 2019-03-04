@@ -17,6 +17,7 @@ from ui_mainwindow import Ui_MainWindow
 _translate = QCoreApplication.translate
 
 
+# noinspection PyPep8Naming
 class MainWindow(QMainWindow):
     def __init__(self, parent: QWidget = None):
         super().__init__(parent)
@@ -50,6 +51,7 @@ class MainWindow(QMainWindow):
     def refreshActionTriggered(self):
         self.__loadUsbDrivesIntoView()
 
+    # noinspection PyUnusedLocal
     @pyqtSlot(QItemSelection, QItemSelection)
     def __driveListSelectionChanged(self, selected: QItemSelection, deselected: QItemSelection):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
@@ -154,10 +156,10 @@ class MainWindow(QMainWindow):
 
         text_cursor = self.__ui.terminalLogWindow.textCursor()
 
-        dapgen_path = os.path.join(info.APP_DIR, 'kmeldb_cli/DapGen.py')
-        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dapgen_path, drive_mount_point))
+        dap_generator_path = os.path.join(info.APP_DIR, 'kmeldb_cli/DapGen.py')
+        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dap_generator_path, drive_mount_point))
 
-        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dapgen_path, drive_mount_point,
+        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dap_generator_path, drive_mount_point,
                                                                   stdout=asyncio.subprocess.PIPE,
                                                                   stderr=asyncio.subprocess.PIPE)
 
@@ -183,8 +185,8 @@ class MainWindow(QMainWindow):
         about_box = aboutdialog.AboutDialog(self)
         about_box.exec()
 
-    def useSettingsObject(self, settings: settings.ApplicationSettings):
-        self.__app_settings = settings
+    def useSettingsObject(self, settings_obj: settings.ApplicationSettings):
+        self.__app_settings = settings_obj
 
         if self.__app_settings.main_window_geometry is not None:
             self.restoreGeometry(self.__app_settings.main_window_geometry)

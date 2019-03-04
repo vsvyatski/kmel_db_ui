@@ -1,8 +1,10 @@
-from ui_aboutdialog import Ui_AboutDialog
-from PyQt5.QtWidgets import QDialog, QWidget
-from PyQt5.QtCore import Qt
 import sys
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog, QWidget
+
 import info
+from ui_aboutdialog import Ui_AboutDialog
 
 
 class AboutDialog(QDialog):
