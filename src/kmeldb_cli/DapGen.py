@@ -38,9 +38,9 @@ elif sys.platform == 'win32':
 log = logging.getLogger(__name__)
 
 __all__ = []
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 __date__ = '2014-05-12'
-__updated__ = '2019-03-04'
+__updated__ = '2019-03-05'
 
 # Holds the list of all media locations
 MediaLocations = []
