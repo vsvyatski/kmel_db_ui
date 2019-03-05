@@ -1,1 +1,3 @@
 asyncqt
+# Required by kmeldb_cli
+hsaudiotag3k

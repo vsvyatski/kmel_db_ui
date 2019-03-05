@@ -1,6 +1,7 @@
 import asyncio
 import os
 import subprocess
+import sys
 
 import asyncqt
 from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication
@@ -155,12 +156,10 @@ class MainWindow(QMainWindow):
 
         text_cursor = self.__ui.terminalLogWindow.textCursor()
 
-        dap_venv_executable = os.path.join(info.APP_DIR, 'kmeldb_cli/venv/bin/python3')
         dap_generator_path = os.path.join(info.APP_DIR, 'kmeldb_cli/DapGen.py')
-        text_cursor.insertText('{} {} {}\n'.format(dap_venv_executable, dap_generator_path, drive_mount_point))
+        text_cursor.insertText('{} {} {}\n'.format(sys.executable, dap_generator_path, drive_mount_point))
 
-        kmeldb_cli_process = await asyncio.create_subprocess_exec(dap_venv_executable, dap_generator_path,
-                                                                  drive_mount_point,
+        kmeldb_cli_process = await asyncio.create_subprocess_exec(sys.executable, dap_generator_path, drive_mount_point,
                                                                   stdout=asyncio.subprocess.PIPE,
                                                                   stderr=asyncio.subprocess.PIPE)
 
