@@ -172,6 +172,7 @@ class Ui_MainWindow(object):
         self.actionClearLog.triggered.connect(MainWindow.clearLogActionTriggered)
         self.actionWriteDatabase.triggered.connect(MainWindow.writeDatabaseActionTriggered)
         self.actionAbout.triggered.connect(MainWindow.aboutActionTriggered)
+        self.actionQuit.triggered.connect(MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
