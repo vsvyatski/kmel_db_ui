@@ -142,8 +142,8 @@ class Ui_MainWindow(object):
         self.actionQuit.setObjectName("actionQuit")
         self.actionPreferences = QtWidgets.QAction(MainWindow)
         self.actionPreferences.setObjectName("actionPreferences")
-        self.actionViewRepositoryOnGithub = QtWidgets.QAction(MainWindow)
-        self.actionViewRepositoryOnGithub.setObjectName("actionViewRepositoryOnGithub")
+        self.actionViewOnGithub = QtWidgets.QAction(MainWindow)
+        self.actionViewOnGithub.setObjectName("actionViewOnGithub")
         self.toolBar.addAction(self.actionRefresh)
         self.toolBar.addAction(self.actionWriteDatabase)
         self.toolBar.addAction(self.actionViewDatabase)
@@ -158,7 +158,7 @@ class Ui_MainWindow(object):
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionPreferences)
         self.menuHelp.addAction(self.actionAbout)
-        self.menuHelp.addAction(self.actionViewRepositoryOnGithub)
+        self.menuHelp.addAction(self.actionViewOnGithub)
         self.menuBar.addAction(self.menuDrive.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
@@ -173,6 +173,7 @@ class Ui_MainWindow(object):
         self.actionWriteDatabase.triggered.connect(MainWindow.writeDatabaseActionTriggered)
         self.actionAbout.triggered.connect(MainWindow.aboutActionTriggered)
         self.actionQuit.triggered.connect(MainWindow.close)
+        self.actionViewOnGithub.triggered.connect(MainWindow.viewOnGithubActionTriggered)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -201,6 +202,7 @@ class Ui_MainWindow(object):
         self.actionPreferences.setIconText(_translate("MainWindow", "Preferences..."))
         self.actionPreferences.setToolTip(_translate("MainWindow", "Edit Preferences"))
         self.actionPreferences.setShortcut(_translate("MainWindow", "Ctrl+,"))
-        self.actionViewRepositoryOnGithub.setText(_translate("MainWindow", "&View Repository on Github"))
+        self.actionViewOnGithub.setText(_translate("MainWindow", "&View Repository on Github"))
+        self.actionViewOnGithub.setIconText(_translate("MainWindow", "View on Github"))
 
 import appresources_rc

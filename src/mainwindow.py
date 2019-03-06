@@ -20,9 +20,9 @@ import subprocess
 import sys
 
 import asyncqt
-from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent
-from PyQt5.QtWidgets import QMainWindow, QWidget
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication, QUrl
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent, QDesktopServices
+from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox
 
 import aboutdialog
 import driveutils
@@ -214,3 +214,10 @@ class MainWindow(QMainWindow):
         self.__app_settings.main_window_geometry = self.saveGeometry()
         self.__app_settings.main_window_splitter_state = self.__ui.splitter.saveState()
         super().closeEvent(event)
+
+    @pyqtSlot()
+    def viewOnGithubActionTriggered(self):
+        if not QDesktopServices.openUrl(QUrl('https://github.com/vsvyatski/kmel_db_ui')):
+            QMessageBox.critical(self, info.APP_NAME,
+                                 _translate('MainWindow',
+                                            'Unable to navigate to the Github repository with the default browser.'))
