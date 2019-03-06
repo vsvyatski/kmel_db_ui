@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
-    <height>261</height>
+    <width>508</width>
+    <height>257</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -112,7 +112,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This application is basically a GUI for the kmel_db utility (&lt;a href=&quot;https://github.com/chrrrisw/kmel_db&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;https://github.com/chrrrisw/kmel_db&lt;/span&gt;&lt;/a&gt;). Its purpose is to generate a Kenwood DAP database on a selected USB drive for using that drive with Kenwood car audio. The drive must be FAT32 formatted. The source code of the utility can be found on &lt;a href=&quot;https://github.com/vsvyatski/kmel_db_ui&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;Github&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Kenwood Database Generator is distributed under the terms of &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;GNU General Public License v3.0&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This application is basically a GUI for the kmel_db utility (&lt;a href=&quot;https://github.com/chrrrisw/kmel_db&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;https://github.com/chrrrisw/kmel_db&lt;/span&gt;&lt;/a&gt;). Its purpose is to generate a Kenwood DAP database on a selected USB drive for using that drive with Kenwood car audio. The drive must be FAT32 formatted.&lt;/p&gt;&lt;p&gt;Kenwood Database Generator is distributed under the terms of &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;GNU General Public License v3.0&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

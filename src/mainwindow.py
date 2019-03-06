@@ -20,9 +20,9 @@ import subprocess
 import sys
 
 import asyncqt
-from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent
-from PyQt5.QtWidgets import QMainWindow, QWidget
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication, QUrl
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent, QDesktopServices
+from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox
 
 import aboutdialog
 import driveutils
@@ -60,8 +60,8 @@ class MainWindow(QMainWindow):
         self.__changeActionAvailabilityBasedOnDriveSelection(False)
 
     def __changeActionAvailabilityBasedOnDriveSelection(self, drive_selected: bool):
-        self.__ui.actionGenerate.setEnabled(drive_selected)
-        self.__ui.actionView.setEnabled(drive_selected)
+        self.__ui.actionWriteDatabase.setEnabled(drive_selected)
+        self.__ui.actionViewDatabase.setEnabled(drive_selected)
 
     @pyqtSlot()
     def refreshActionTriggered(self):
@@ -81,7 +81,7 @@ class MainWindow(QMainWindow):
         return model_index.data(Qt.UserRole + 1)
 
     @pyqtSlot()
-    def viewActionTriggered(self):
+    def viewDatabaseActionTriggered(self):
         drive_mount_point = self.__getSelectedDriveMountPoint()
         if drive_mount_point is None:
             return
@@ -162,7 +162,7 @@ class MainWindow(QMainWindow):
             self.__ui.terminalLogWindow.ensureCursorVisible()
 
     @asyncqt.asyncSlot()
-    async def generateActionTriggered(self):
+    async def writeDatabaseActionTriggered(self):
         self.__uiBeginGenerateOperation()
 
         drive_mount_point = self.__getSelectedDriveMountPoint()
@@ -191,10 +191,10 @@ class MainWindow(QMainWindow):
         self.__uiEndGenerateOperation()
 
     def __uiBeginGenerateOperation(self):
-        self.__ui.actionGenerate.setEnabled(False)
+        self.__ui.actionWriteDatabase.setEnabled(False)
 
     def __uiEndGenerateOperation(self):
-        self.__ui.actionGenerate.setEnabled(True)
+        self.__ui.actionWriteDatabase.setEnabled(True)
 
     @pyqtSlot()
     def aboutActionTriggered(self):
@@ -214,3 +214,10 @@ class MainWindow(QMainWindow):
         self.__app_settings.main_window_geometry = self.saveGeometry()
         self.__app_settings.main_window_splitter_state = self.__ui.splitter.saveState()
         super().closeEvent(event)
+
+    @pyqtSlot()
+    def viewOnGithubActionTriggered(self):
+        if not QDesktopServices.openUrl(QUrl('https://github.com/vsvyatski/kmel_db_ui')):
+            QMessageBox.critical(self, info.APP_NAME,
+                                 _translate('MainWindow',
+                                            'Unable to navigate to the Github repository with the default browser.'))
