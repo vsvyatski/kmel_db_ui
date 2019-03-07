@@ -14,17 +14,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import subprocess
-import glob
-import os
+import sys
 
-subprocess.run(['pyuic5', '-o', '../ui_mainwindow.py', '../forms/mainwindow.ui'])
-subprocess.run(['pyuic5', '-o', '../ui_aboutdialog.py', '../forms/aboutdialog.ui'])
-subprocess.run(['pyuic5', '-o', '../ui_preferencesdialog.py', '../forms/preferencesdialog.ui'])
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog, QWidget
 
-subprocess.run(['pyrcc5', '-o', '../appresources_rc.py', '../appresources.qrc'])
+from ui_preferencesdialog import Ui_PreferencesDialog
 
-# translations
-# for tsfile in glob.glob('../translations/*.ts'):
-#     basename = os.path.basename(tsfile)
-#     subprocess.run(['lrelease', tsfile, '-qm', '../translations/' + os.path.splitext(basename)[0] + '.qm'])
+
+class PreferencesDialog(QDialog):
+    def __init__(self, parent: QWidget = None):
+        if sys.platform == 'darwin':
+            window_flags = Qt.Sheet
+        else:
+            window_flags = Qt.WindowTitleHint | Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint
+        super().__init__(parent, window_flags)
+
+        self.__ui = Ui_PreferencesDialog()
+        self.__ui.setupUi(self)

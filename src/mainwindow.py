@@ -27,6 +27,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox
 import aboutdialog
 import driveutils
 import info
+import preferencesdialog
 import settings
 from ui_mainwindow import Ui_MainWindow
 
@@ -221,3 +222,8 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(self, info.APP_NAME,
                                  _translate('MainWindow',
                                             'Unable to navigate to the Github repository with the default browser.'))
+
+    @pyqtSlot()
+    def preferencesActionTriggered(self):
+        preferences_dialog = preferencesdialog.PreferencesDialog(self)
+        preferences_dialog.exec()
