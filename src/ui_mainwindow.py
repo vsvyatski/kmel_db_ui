@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file '../forms/mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -130,7 +131,7 @@ class Ui_MainWindow(object):
         self.actionViewDatabase.setObjectName("actionViewDatabase")
         self.actionAbout = QtWidgets.QAction(MainWindow)
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(":/actions/about"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap(":/actions/info"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionAbout.setIcon(icon4)
         self.actionAbout.setObjectName("actionAbout")
         self.actionClearLog = QtWidgets.QAction(MainWindow)
@@ -141,6 +142,9 @@ class Ui_MainWindow(object):
         self.actionQuit = QtWidgets.QAction(MainWindow)
         self.actionQuit.setObjectName("actionQuit")
         self.actionPreferences = QtWidgets.QAction(MainWindow)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap(":/actions/preferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionPreferences.setIcon(icon6)
         self.actionPreferences.setObjectName("actionPreferences")
         self.actionViewOnGithub = QtWidgets.QAction(MainWindow)
         self.actionViewOnGithub.setObjectName("actionViewOnGithub")
@@ -204,5 +208,6 @@ class Ui_MainWindow(object):
         self.actionPreferences.setShortcut(_translate("MainWindow", "Ctrl+,"))
         self.actionViewOnGithub.setText(_translate("MainWindow", "&View Repository on Github"))
         self.actionViewOnGithub.setIconText(_translate("MainWindow", "View on Github"))
+
 
 import appresources_rc

@@ -319,7 +319,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="../appresources.qrc">
-     <normaloff>:/actions/about</normaloff>:/actions/about</iconset>
+     <normaloff>:/actions/info</normaloff>:/actions/info</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -343,6 +343,10 @@
    </property>
   </action>
   <action name="actionPreferences">
+   <property name="icon">
+    <iconset resource="../appresources.qrc">
+     <normaloff>:/actions/preferences</normaloff>:/actions/preferences</iconset>
+   </property>
    <property name="text">
     <string>&amp;Preferences...</string>
    </property>
