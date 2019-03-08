@@ -29,6 +29,7 @@ class Ui_PreferencesDialog(object):
         self.checkBoxSelectFirstDrive.setObjectName("checkBoxSelectFirstDrive")
         self.verticalLayout.addWidget(self.checkBoxSelectFirstDrive)
         self.checkBoxShowToolbar = QtWidgets.QCheckBox(PreferencesDialog)
+        self.checkBoxShowToolbar.setChecked(True)
         self.checkBoxShowToolbar.setObjectName("checkBoxShowToolbar")
         self.verticalLayout.addWidget(self.checkBoxShowToolbar)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
