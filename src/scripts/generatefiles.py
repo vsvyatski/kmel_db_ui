@@ -14,9 +14,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import subprocess
 import glob
 import os
+import subprocess
 
 subprocess.run(['pyuic5', '-o', '../ui_mainwindow.py', '../forms/mainwindow.ui'])
 subprocess.run(['pyuic5', '-o', '../ui_aboutdialog.py', '../forms/aboutdialog.ui'])
@@ -25,6 +25,6 @@ subprocess.run(['pyuic5', '-o', '../ui_preferencesdialog.py', '../forms/preferen
 subprocess.run(['pyrcc5', '-o', '../appresources_rc.py', '../appresources.qrc'])
 
 # translations
-# for tsfile in glob.glob('../translations/*.ts'):
-#     basename = os.path.basename(tsfile)
-#     subprocess.run(['lrelease', tsfile, '-qm', '../translations/' + os.path.splitext(basename)[0] + '.qm'])
+for tsfile in glob.glob('../translations/*.ts'):
+    basename = os.path.basename(tsfile)
+    subprocess.run(['lrelease', tsfile, '-qm', '../translations/' + os.path.splitext(basename)[0] + '.qm'])

@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file '../forms/preferencesdialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_PreferencesDialog(object):
     def setupUi(self, PreferencesDialog):
@@ -72,6 +71,5 @@ class Ui_PreferencesDialog(object):
         self.checkBoxShowToolbar.setText(_translate("PreferencesDialog", "S&how toolbar"))
         self.labelLanguage.setText(_translate("PreferencesDialog", "&Language*"))
         self.labelRequireRestart.setText(_translate("PreferencesDialog", "* - this option requires restart"))
-
 
 import appresources_rc

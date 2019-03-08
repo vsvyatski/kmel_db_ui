@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file '../forms/mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -209,6 +208,5 @@ class Ui_MainWindow(object):
         self.actionPreferences.setShortcut(_translate("MainWindow", "Ctrl+,"))
         self.actionViewOnGithub.setText(_translate("MainWindow", "&View Repository on Github"))
         self.actionViewOnGithub.setIconText(_translate("MainWindow", "View on Github"))
-
 
 import appresources_rc
