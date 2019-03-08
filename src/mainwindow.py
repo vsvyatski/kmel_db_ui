@@ -22,7 +22,7 @@ import sys
 import asyncqt
 from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication, QUrl
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent, QDesktopServices
-from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox, QDialog
 
 import aboutdialog
 import driveutils
@@ -52,6 +52,7 @@ class MainWindow(QMainWindow):
         self.__initUiFromSettings()
 
     def __loadUsbDrivesIntoView(self):
+        # TODO: select first drive if that is enabled in the settings
         model: QStandardItemModel = self.__ui.driveList.model()
         model.clear()
         for drive_info in driveutils.get_fat_usb_mounts():
@@ -204,6 +205,8 @@ class MainWindow(QMainWindow):
         about_box.exec()
 
     def __initUiFromSettings(self):
+        self.__ui.toolBar.setVisible(self.__app_settings.show_toolbar)
+
         if self.__app_settings.main_window_geometry is not None:
             self.restoreGeometry(self.__app_settings.main_window_geometry)
 
@@ -224,5 +227,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def preferencesActionTriggered(self):
+        # TODO: select first drive if that is enabled in the settings
         preferences_dialog = preferencesdialog.PreferencesDialog(self.__app_settings, self)
-        preferences_dialog.exec()
+        if preferences_dialog.exec() == QDialog.Accepted:
+            self.__ui.toolBar.setVisible(self.__app_settings.show_toolbar)
