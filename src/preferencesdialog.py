@@ -19,6 +19,7 @@ import sys
 from PyQt5.QtCore import Qt, QCoreApplication
 from PyQt5.QtWidgets import QDialog, QWidget
 
+import settings
 from ui_preferencesdialog import Ui_PreferencesDialog
 
 _translate = QCoreApplication.translate
@@ -26,7 +27,7 @@ _translate = QCoreApplication.translate
 
 # noinspection PyPep8Naming
 class PreferencesDialog(QDialog):
-    def __init__(self, parent: QWidget = None):
+    def __init__(self, settings_obj: settings.ApplicationSettings, parent: QWidget = None):
         if sys.platform == 'darwin':
             window_flags = Qt.Sheet
         else:
@@ -38,6 +39,9 @@ class PreferencesDialog(QDialog):
 
         self.__loadLanguagesList()
 
+        self.__app_settings = settings_obj
+        self.__initUiFromSettings()
+
     def __loadLanguagesList(self):
         self.__ui.comboBoxLanguage.addItem(_translate('PreferencesDialog', 'System default'))
 
@@ -47,3 +51,19 @@ class PreferencesDialog(QDialog):
         language_list.sort(key=lambda item: item[1])
         for language_tuple in language_list:
             self.__ui.comboBoxLanguage.addItem(language_tuple[1], language_tuple[0])
+
+    def __initUiFromSettings(self):
+        self.__ui.checkBoxSelectFirstDrive.setChecked(self.__app_settings.select_first_available_drive)
+        self.__ui.checkBoxShowToolbar.setChecked(self.__app_settings.show_toolbar)
+
+        language_index = self.__ui.comboBoxLanguage.findData(self.__app_settings.language)
+        if language_index != -1:
+            self.__ui.comboBoxLanguage.setCurrentIndex(language_index)
+
+    def accept(self):
+        self.__app_settings.select_first_available_drive = self.__ui.checkBoxSelectFirstDrive.isChecked()
+        self.__app_settings.show_toolbar = self.__ui.checkBoxShowToolbar.isChecked()
+        self.__app_settings.language = self.__ui.comboBoxLanguage.currentData()
+        self.__app_settings.write()
+
+        super().accept()

@@ -225,5 +225,5 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def preferencesActionTriggered(self):
-        preferences_dialog = preferencesdialog.PreferencesDialog(self)
+        preferences_dialog = preferencesdialog.PreferencesDialog(self.__app_settings, self)
         preferences_dialog.exec()
