@@ -16,12 +16,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import sys
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QCoreApplication
 from PyQt5.QtWidgets import QDialog, QWidget
 
 from ui_preferencesdialog import Ui_PreferencesDialog
 
+_translate = QCoreApplication.translate
 
+
+# noinspection PyPep8Naming
 class PreferencesDialog(QDialog):
     def __init__(self, parent: QWidget = None):
         if sys.platform == 'darwin':
@@ -32,3 +35,15 @@ class PreferencesDialog(QDialog):
 
         self.__ui = Ui_PreferencesDialog()
         self.__ui.setupUi(self)
+
+        self.__loadLanguagesList()
+
+    def __loadLanguagesList(self):
+        self.__ui.comboBoxLanguage.addItem(_translate('PreferencesDialog', 'System default'))
+
+        language_list = [('en', _translate('PreferencesDialog', 'English')),
+                         ('ru', _translate('PreferencesDialog', 'Russian')),
+                         ('es', _translate('PreferencesDialog', 'Spanish'))]
+        language_list.sort(key=lambda item: item[1])
+        for language_tuple in language_list:
+            self.__ui.comboBoxLanguage.addItem(language_tuple[1], language_tuple[0])
