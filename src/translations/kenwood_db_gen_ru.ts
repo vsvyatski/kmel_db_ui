@@ -179,47 +179,47 @@
     <message>
         <location filename="../preferencesdialog.py" line="46"/>
         <source>System default</source>
-        <translation type="unfinished"></translation>
+        <translation>Системы по умолчанию</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.py" line="48"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Английский</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.py" line="49"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Русский</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.py" line="50"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Испанский</translation>
     </message>
     <message>
         <location filename="../ui_preferencesdialog.py" line="70"/>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Предпочтения</translation>
     </message>
     <message>
         <location filename="../ui_preferencesdialog.py" line="71"/>
         <source>&amp;Select first available item on USB drives list load</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выбирать первый доступный элемент при загрузке списка USB дисков</translation>
     </message>
     <message>
         <location filename="../ui_preferencesdialog.py" line="72"/>
         <source>S&amp;how toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Показывать панель инструментов</translation>
     </message>
     <message>
         <location filename="../ui_preferencesdialog.py" line="73"/>
         <source>&amp;Language*</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Язык*</translation>
     </message>
     <message>
         <location filename="../ui_preferencesdialog.py" line="74"/>
         <source>* - this option requires restart</source>
-        <translation type="unfinished"></translation>
+        <translation>* - эта опция требует перезапуска</translation>
     </message>
 </context>
 </TS>
