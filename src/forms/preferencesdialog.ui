@@ -33,7 +33,7 @@
    <item>
     <widget class="QCheckBox" name="checkBoxSelectFirstDrive">
      <property name="text">
-      <string>&amp;Select first available USB drive in the list</string>
+      <string>&amp;Select first available item on USB drives list load</string>
      </property>
     </widget>
    </item>

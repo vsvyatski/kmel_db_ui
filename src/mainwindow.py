@@ -20,7 +20,7 @@ import subprocess
 import sys
 
 import asyncqt
-from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication, QUrl
+from PyQt5.QtCore import pyqtSlot, QItemSelection, Qt, QPoint, QCoreApplication, QUrl, QItemSelectionModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QTextCursor, QCloseEvent, QDesktopServices
 from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox, QDialog
 
@@ -42,17 +42,16 @@ class MainWindow(QMainWindow):
         self.__ui = Ui_MainWindow()
         self.__ui.setupUi(self)
 
+        self.__app_settings = settings_obj
+        self.__initUiFromSettings()
+
         model = QStandardItemModel(self.__ui.driveList)
         self.__ui.driveList.setModel(model)
         self.__ui.driveList.selectionModel().selectionChanged.connect(self.__driveListSelectionChanged)
 
         self.__loadUsbDrivesIntoView()
 
-        self.__app_settings = settings_obj
-        self.__initUiFromSettings()
-
     def __loadUsbDrivesIntoView(self):
-        # TODO: select first drive if that is enabled in the settings
         model: QStandardItemModel = self.__ui.driveList.model()
         model.clear()
         for drive_info in driveutils.get_fat_usb_mounts():
@@ -60,7 +59,14 @@ class MainWindow(QMainWindow):
             item.setData(drive_info.mount_point)
             model.appendRow(item)
 
-        self.__changeActionAvailabilityBasedOnDriveSelection(False)
+        drive_selected = False
+        if self.__app_settings.select_first_available_drive:
+            drive_index = model.index(0, 0)
+            if drive_index.isValid():
+                self.__ui.driveList.selectionModel().select(drive_index, QItemSelectionModel.Select)
+                drive_selected = True
+
+        self.__changeActionAvailabilityBasedOnDriveSelection(drive_selected)
 
     def __changeActionAvailabilityBasedOnDriveSelection(self, drive_selected: bool):
         self.__ui.actionWriteDatabase.setEnabled(drive_selected)
@@ -227,7 +233,6 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def preferencesActionTriggered(self):
-        # TODO: select first drive if that is enabled in the settings
         preferences_dialog = preferencesdialog.PreferencesDialog(self.__app_settings, self)
         if preferences_dialog.exec() == QDialog.Accepted:
             self.__ui.toolBar.setVisible(self.__app_settings.show_toolbar)

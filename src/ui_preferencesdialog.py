@@ -68,7 +68,7 @@ class Ui_PreferencesDialog(object):
     def retranslateUi(self, PreferencesDialog):
         _translate = QtCore.QCoreApplication.translate
         PreferencesDialog.setWindowTitle(_translate("PreferencesDialog", "Preferences"))
-        self.checkBoxSelectFirstDrive.setText(_translate("PreferencesDialog", "&Select first available USB drive in the list"))
+        self.checkBoxSelectFirstDrive.setText(_translate("PreferencesDialog", "&Select first available item on USB drives list load"))
         self.checkBoxShowToolbar.setText(_translate("PreferencesDialog", "S&how toolbar"))
         self.labelLanguage.setText(_translate("PreferencesDialog", "&Language*"))
         self.labelRequireRestart.setText(_translate("PreferencesDialog", "* - this option requires restart"))
