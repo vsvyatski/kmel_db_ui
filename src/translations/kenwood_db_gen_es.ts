@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0">
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="../ui_aboutdialog.py" line="87"/>
         <source>About Kenwood Database Generator</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de Kenwood Database Generator</translation>
     </message>
     <message>
         <location filename="../ui_aboutdialog.py" line="88"/>
         <source>Kenwood Database Generator</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenwood Database Generator</translation>
     </message>
     <message>
         <location filename="../ui_aboutdialog.py" line="89"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Versión: </translation>
     </message>
     <message>
         <location filename="../ui_aboutdialog.py" line="90"/>
         <source>KMEL DB CLI version: 0.2.3</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión de KMEL DB CLI: 0.2.3</translation>
     </message>
     <message>
         <location filename="../ui_aboutdialog.py" line="91"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This application is basically a GUI for the kmel_db utility (&lt;a href=&quot;https://github.com/chrrrisw/kmel_db&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;https://github.com/chrrrisw/kmel_db&lt;/span&gt;&lt;/a&gt;). Its purpose is to generate a Kenwood DAP database on a selected USB drive for using that drive with Kenwood car audio. The drive must be FAT32 formatted.&lt;/p&gt;&lt;p&gt;Kenwood Database Generator is distributed under the terms of &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;GNU General Public License v3.0&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Esta aplicación es básicamente una GUI para la kmel_db utilidad (&lt;a href=&quot;https://github.com/chrrrisw/kmel_db&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;https://github.com/chrrrisw/kmel_db&lt;/span&gt;&lt;/a&gt;). Su intención es generar una base de datos Kenwood DAP en la unidad USB seleccionada para usar esa unidad con Kenwood audio del coche. La unidad debe ser formateada como FAT32.&lt;/p&gt;&lt;p&gt;Kenwood Database Generator se distribuye bajo la &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;Licencia Pública General de GNU v3.0&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
