@@ -80,6 +80,7 @@ cp "$srcDir/program.py" "$outDir"
 cp "$srcDir/settings.py" "$outDir"
 cp "$srcDir/ui_"*.py "$outDir"
 cp "$currentDir/LICENSE" "$outDir"
+mkdir "$outDir/translations" && cp "$srcDir/translations/"*.qm "$outDir/translations"
 
 echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
