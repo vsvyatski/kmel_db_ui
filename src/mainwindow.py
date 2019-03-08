@@ -36,7 +36,7 @@ _translate = QCoreApplication.translate
 
 # noinspection PyPep8Naming
 class MainWindow(QMainWindow):
-    def __init__(self, parent: QWidget = None):
+    def __init__(self, settings_obj: settings.ApplicationSettings, parent: QWidget = None):
         super().__init__(parent)
 
         self.__ui = Ui_MainWindow()
@@ -48,7 +48,8 @@ class MainWindow(QMainWindow):
 
         self.__loadUsbDrivesIntoView()
 
-        self.__app_settings: settings.ApplicationSettings = None
+        self.__app_settings = settings_obj
+        self.__initUiFromSettings()
 
     def __loadUsbDrivesIntoView(self):
         model: QStandardItemModel = self.__ui.driveList.model()
@@ -202,9 +203,7 @@ class MainWindow(QMainWindow):
         about_box = aboutdialog.AboutDialog(self)
         about_box.exec()
 
-    def useSettingsObject(self, settings_obj: settings.ApplicationSettings):
-        self.__app_settings = settings_obj
-
+    def __initUiFromSettings(self):
         if self.__app_settings.main_window_geometry is not None:
             self.restoreGeometry(self.__app_settings.main_window_geometry)
 

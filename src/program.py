@@ -32,8 +32,7 @@ if __name__ == '__main__':
     settings = settings.ApplicationSettings()
     settings.read()
 
-    main_window = MainWindow()
-    main_window.useSettingsObject(settings)
+    main_window = MainWindow(settings)
     main_window.show()
 
     with loop:
