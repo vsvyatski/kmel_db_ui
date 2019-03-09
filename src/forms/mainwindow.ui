@@ -204,7 +204,7 @@
     <enum>Qt::PreventContextMenu</enum>
    </property>
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>Main Toolbar</string>
    </property>
    <property name="movable">
     <bool>false</bool>
@@ -351,7 +351,7 @@
     <string>&amp;Preferences...</string>
    </property>
    <property name="iconText">
-    <string>Preferences...</string>
+    <string>Preferences</string>
    </property>
    <property name="toolTip">
     <string>Edit Preferences</string>

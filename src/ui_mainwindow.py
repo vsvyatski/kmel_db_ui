@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file '../forms/mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -186,7 +185,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Kenwood Database Generator"))
         self.driveListLabel.setText(_translate("MainWindow", "&USB Drives"))
         self.terminalLogLabel.setText(_translate("MainWindow", "Terminal &Output"))
-        self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
+        self.toolBar.setWindowTitle(_translate("MainWindow", "Main Toolbar"))
         self.menuDrive.setTitle(_translate("MainWindow", "&Drive"))
         self.menuEdit.setTitle(_translate("MainWindow", "&Edit"))
         self.menuHelp.setTitle(_translate("MainWindow", "&Help"))
@@ -204,11 +203,10 @@ class Ui_MainWindow(object):
         self.actionQuit.setText(_translate("MainWindow", "&Quit"))
         self.actionQuit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
         self.actionPreferences.setText(_translate("MainWindow", "&Preferences..."))
-        self.actionPreferences.setIconText(_translate("MainWindow", "Preferences..."))
+        self.actionPreferences.setIconText(_translate("MainWindow", "Preferences"))
         self.actionPreferences.setToolTip(_translate("MainWindow", "Edit Preferences"))
         self.actionPreferences.setShortcut(_translate("MainWindow", "Ctrl+,"))
         self.actionViewOnGithub.setText(_translate("MainWindow", "&View Repository on Github"))
         self.actionViewOnGithub.setIconText(_translate("MainWindow", "View on Github"))
-
 
 import appresources_rc
