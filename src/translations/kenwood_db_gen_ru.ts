@@ -143,12 +143,12 @@
     <message>
         <location filename="../ui_mainwindow.py" line="205"/>
         <source>&amp;Preferences...</source>
-        <translation>&amp;Настройки...</translation>
+        <translation>&amp;Предпочтения...</translation>
     </message>
     <message>
         <location filename="../ui_mainwindow.py" line="207"/>
         <source>Edit Preferences</source>
-        <translation>Редактировать настройки</translation>
+        <translation>Редактировать предпочтения</translation>
     </message>
     <message>
         <location filename="../ui_mainwindow.py" line="208"/>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../ui_mainwindow.py" line="206"/>
         <source>Preferences</source>
-        <translation>Настройки</translation>
+        <translation>Предпочтения</translation>
     </message>
 </context>
 <context>
