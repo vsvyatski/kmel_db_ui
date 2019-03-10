@@ -25,20 +25,33 @@ usage() {
     echo
     echo 'options:'
     echo '  -h                   display this help message and exit'
-    echo '  -p                   pack build results into tar.gz archive'
+    echo '  -p <target_format>   pack build results into target format'
+    echo '    supported formats:'
+    echo "      tgz - a *.tar.gz archive, it's distribution independent, but requires"
+    echo '            manual installation'
+    echo '      deb - a *.deb package for Debian and derivatives'
     echo '  -v <version_number>  add version number to the archive name (used with -p)'
 }
 
-pack=false
+checkFormat() {
+    local format=$1
+    test ${format} = tgz -o ${format} = deb
+}
 
-while getopts ":phv:" opt; do
+while getopts ":p:hv:" opt; do
 	case ${opt} in
 	    h)
 	        usage
 	        exit
 	        ;;
 		p)
-			pack=true
+			package_format=$OPTARG
+			if ! checkFormat $package_format
+			then
+                printf "${clr_red}ERROR: Unrecognized target package format \"$package_format\"${clr_end}\n" 1>&2
+                usage
+                exit 1
+			fi
 			;;
 		v)
 			version_suffix="-$OPTARG"
@@ -87,13 +100,16 @@ echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
 "$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
 
-if [ ${pack} = true ]
+if [ ${package_format} = tgz ]
 then
-    echo Packing...
+    echo Creating tar.gz archive...
 
     cd "$outDir"
     tar -czf "../kmeldb-ui$version_suffix.tar.gz" *
     cd -
+elif [ ${package_format} = deb ]
+then
+    echo deb packaging is not implemented yet
 fi
 
 echo Build has been successful.
