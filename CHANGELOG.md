@@ -1,6 +1,11 @@
 # Changelog
 
-## [v0.2.0](https://github.com/vsvyatski/kmel_db_ui/tree/v0.1.0) (2019-03-10)
+## [v0.2.1](https://github.com/vsvyatski/kmel_db_ui/tree/v0.2.1) (2019-03-10)
+
+**Fixed:**
+- A typo in the changelog
+
+## [v0.2.0](https://github.com/vsvyatski/kmel_db_ui/tree/v0.2.0) (2019-03-10)
 
 **Added:**
 - User interface improvements
