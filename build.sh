@@ -109,7 +109,7 @@ then
     cd -
 elif [ ${package_format} = deb ]
 then
-    echo deb packaging is not implemented yet
+    fpm -s dir -t deb -p "$outDir/../kmeldb-ui$version_suffix.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" --license GPL-3 --vendor "Vladimir Svyatski" "$outDir"
 fi
 
 echo Build has been successful.
