@@ -109,7 +109,10 @@ then
     cd -
 elif [ ${package_format} = deb ]
 then
-    fpm -s dir -t deb -p "$outDir/../kmeldb-ui$version_suffix.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" --license GPL-3 --vendor "Vladimir Svyatski" "$outDir"
+    package_description="Kenwood Music Editor Light replacement for Linux systems.
+ This is a GUI application that can generate Kenwood DAP databases on a selected FAT32 formatted USB drive. The database is used by Kenwood car audio systems to allow searching by album, title, genre and artist. It also allows creation of playlists."
+    fpm -s dir -t deb -p "$outDir/../kmeldb-ui$version_suffix.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
+    --license GPL-3 --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$package_description" "$outDir"
 fi
 
 echo Build has been successful.
