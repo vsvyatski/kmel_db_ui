@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Kenwood Database Generator
+GenericName=Music File Indexer for Car Audio
+GenericName[es]=Indexador de archivos de música para audio de auto
+GenericName[ru]=Индексатор музыкальных файлов для автомобильного аудио
+Comment=A replacement of the Windows application "Kenwood Music Editor Light" for Linux
+Exec=sh /opt/kmeldb-ui/kenwooddbgen.sh
+Icon=/opt/kmeldb-ui/kenwooddbgen.png
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utility;Qt;
