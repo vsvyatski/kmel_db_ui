@@ -65,10 +65,10 @@ while getopts ":p:h" opt; do
 	esac
 done
 
-currentDir=$(realpath $(dirname "$0"))
+thisScriptDir=$(realpath $(dirname "$0"))
 
-outDir="$currentDir/dist/kmeldb-ui"
-srcDir="$currentDir/src"
+outDir="$thisScriptDir/dist/kmeldb-ui"
+srcDir="$thisScriptDir/src"
 if [ ! -d "$outDir" ]
 then
 	mkdir -p "$outDir"
@@ -89,14 +89,14 @@ cp "$srcDir/preferencesdialog.py" "$outDir"
 cp "$srcDir/program.py" "$outDir"
 cp "$srcDir/settings.py" "$outDir"
 cp "$srcDir/ui_"*.py "$outDir"
-cp "$currentDir/LICENSE" "$outDir"
+cp "$thisScriptDir/LICENSE" "$outDir"
 mkdir "$outDir/translations" && cp "$srcDir/translations/"*.qm "$outDir/translations"
 
 echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
 "$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
 
-appVersion=$(python3 "$currentDir/print_version.py")
+appVersion=$(python3 "$thisScriptDir/print_version.py")
 if [ ${packageFormat} = tgz ]
 then
     echo Creating tar.gz archive...
@@ -104,18 +104,22 @@ then
     cd "$outDir"
     tar -czf "../kmeldb-ui_$appVersion.tar.gz" *
     cd -
+    
+    echo "Created archive $outDir/../kmeldb-ui_$appVersion.tar.gz"
 elif [ ${packageFormat} = deb ]
 then
     debTmpDir=$(mktemp -d)
     mkdir "$debTmpDir/opt" && cp -r "$outDir" "$debTmpDir/opt"
+    mkdir -p "$debTmpDir/usr/share/applications/" && cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$debTmpDir/usr/share/applications"
+
     packageDescription="Kenwood Music Editor Light replacement for Linux systems.
  This is a GUI application that can generate Kenwood DAP databases on a selected FAT32 formatted USB drive. The database is used by Kenwood car audio systems to allow searching by album, title, genre and artist. It also allows creation of playlists."
 
     cd "$debTmpDir"
 
-    fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
+    fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
     --license GPL-3+ --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" \
-    --deb-changelog "$currentDir/packaging/deb/changelog" .
+    --deb-changelog "$thisScriptDir/packaging/deb/changelog" .
     
     cd -
 fi
