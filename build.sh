@@ -44,10 +44,10 @@ while getopts ":p:h" opt; do
 	        exit
 	        ;;
 		p)
-			package_format=$OPTARG
-			if ! checkFormat $package_format
+			packageFormat=$OPTARG
+			if ! checkFormat $packageFormat
 			then
-                printf "${clr_red}ERROR: Unrecognized target package format \"$package_format\"${clr_end}\n" 1>&2
+                printf "${clr_red}ERROR: Unrecognized target package format \"$packageFormat\"${clr_end}\n" 1>&2
                 usage
                 exit 1
 			fi
@@ -65,7 +65,7 @@ while getopts ":p:h" opt; do
 	esac
 done
 
-currentDir=$(dirname "$0")
+currentDir=$(realpath $(dirname "$0"))
 
 outDir="$currentDir/dist/kmeldb-ui"
 srcDir="$currentDir/src"
@@ -96,21 +96,28 @@ echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
 "$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
 
-app_version=$(python3 "$currentDir/print_version.py")
-if [ ${package_format} = tgz ]
+appVersion=$(python3 "$currentDir/print_version.py")
+if [ ${packageFormat} = tgz ]
 then
     echo Creating tar.gz archive...
 
     cd "$outDir"
-    tar -czf "../kmeldb-ui_$app_version.tar.gz" *
+    tar -czf "../kmeldb-ui_$appVersion.tar.gz" *
     cd -
-elif [ ${package_format} = deb ]
+elif [ ${packageFormat} = deb ]
 then
-    package_description="Kenwood Music Editor Light replacement for Linux systems.
+    debTmpDir=$(mktemp -d)
+    mkdir "$debTmpDir/opt" && cp -r "$outDir" "$debTmpDir/opt"
+    packageDescription="Kenwood Music Editor Light replacement for Linux systems.
  This is a GUI application that can generate Kenwood DAP databases on a selected FAT32 formatted USB drive. The database is used by Kenwood car audio systems to allow searching by album, title, genre and artist. It also allows creation of playlists."
-    fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${app_version}_all.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
-    --license GPL-3+ --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$package_description" \
-    --deb-changelog "$currentDir/packaging/deb/changelog" "$outDir"
+
+    cd "$debTmpDir"
+
+    fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
+    --license GPL-3+ --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" \
+    --deb-changelog "$currentDir/packaging/deb/changelog" .
+    
+    cd -
 fi
 
 echo Build has been successful.
