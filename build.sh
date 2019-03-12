@@ -30,7 +30,6 @@ usage() {
     echo "      tgz - a *.tar.gz archive, it's distribution independent, but requires"
     echo '            manual installation'
     echo '      deb - a *.deb package for Debian and derivatives'
-    echo '  -v <version_number>  add version number to the archive name (used with -p)'
 }
 
 checkFormat() {
@@ -38,7 +37,7 @@ checkFormat() {
     test ${format} = tgz -o ${format} = deb
 }
 
-while getopts ":p:hv:" opt; do
+while getopts ":p:h" opt; do
 	case ${opt} in
 	    h)
 	        usage
@@ -52,9 +51,6 @@ while getopts ":p:hv:" opt; do
                 usage
                 exit 1
 			fi
-			;;
-		v)
-			version_suffix="-$OPTARG"
 			;;
 		\?)
 			printf "${clr_red}ERROR: Unrecognized option -$OPTARG${clr_end}\n" 1>&2
@@ -100,18 +96,19 @@ echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
 "$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
 
+app_version=$(python3 "$currentDir/print_version.py")
 if [ ${package_format} = tgz ]
 then
     echo Creating tar.gz archive...
 
     cd "$outDir"
-    tar -czf "../kmeldb-ui$version_suffix.tar.gz" *
+    tar -czf "../kmeldb-ui_$app_version.tar.gz" *
     cd -
 elif [ ${package_format} = deb ]
 then
     package_description="Kenwood Music Editor Light replacement for Linux systems.
  This is a GUI application that can generate Kenwood DAP databases on a selected FAT32 formatted USB drive. The database is used by Kenwood car audio systems to allow searching by album, title, genre and artist. It also allows creation of playlists."
-    fpm -s dir -t deb -p "$outDir/../kmeldb-ui$version_suffix.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
+    fpm -s dir -t deb -p "$outDir/../kmeldb-ui_${app_version}_all.deb" -n kmeldb-ui -v 0.3.0 -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
     --license GPL-3 --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$package_description" \
     --deb-changelog "$currentDir/packaging/deb/changelog" "$outDir"
 fi
