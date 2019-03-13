@@ -34,7 +34,7 @@ usage() {
 
 checkFormat() {
     local format=$1
-    test ${format} = tgz -o ${format} = deb
+    test ${format} = tgz -o ${format} = deb -o ${format} = pacman
 }
 
 while getopts ":p:h" opt; do
@@ -118,6 +118,21 @@ then
     fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
     --license GPL-3+ --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" \
     --deb-changelog "$thisScriptDir/packaging/deb/changelog" -d "python3-pyqt5 >= 5.5~" -d "python3-venv >= 3.5~" -d "python3-wheel >= 0.29~" --deb-recommends "qttranslations5-l10n >= 5.5~" \
+    --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
+    
+    cd -
+elif [ "$packageFormat" = pacman ]
+then
+    pacmanTmpDir=$(mktemp -d)
+    mkdir "$pacmanTmpDir/opt" && cp -r "$outDir" "$pacmanTmpDir/opt"
+    mkdir -p "$pacmanTmpDir/usr/share/applications/" && cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$pacmanTmpDir/usr/share/applications"
+    
+    packageDescription="Kenwood Music Editor Light replacement for Linux systems"
+
+    cd "$pacmanTmpDir"
+
+    fpm -f -s dir -t pacman -p "$outDir/../kmeldb-ui-${appVersion}-any.pkg.tar.xz" -n kmeldb-ui -v ${appVersion} -m "Vladimir Svyatski <vsvyatski@yandex.ru>" \
+    --license GPL3 -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" \
     --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
     
     cd -
