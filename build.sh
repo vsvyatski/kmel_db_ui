@@ -119,7 +119,7 @@ then
 
     fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
     --license GPL-3+ --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" \
-    --deb-changelog "$thisScriptDir/packaging/deb/changelog" .
+    --deb-changelog "$thisScriptDir/packaging/deb/changelog" -d "python3-pyqt5 >= 5.5~" --deb-recommends "qttranslations5-l10n >= 5.5~" .
     
     cd -
 fi
