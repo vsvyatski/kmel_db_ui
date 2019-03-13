@@ -96,8 +96,8 @@ echo Generating virtual environment...
 python3 -m venv --system-site-packages "$outDir/venv"
 "$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
 
-appVersion=$(python3 "$thisScriptDir/print_version.py")
-if [ ${packageFormat} = tgz ]
+appVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
+if [ "$packageFormat" = tgz ]
 then
     echo Creating tar.gz archive...
 
@@ -106,7 +106,7 @@ then
     cd -
     
     echo "Created archive $outDir/../kmeldb-ui_$appVersion.tar.gz"
-elif [ ${packageFormat} = deb ]
+elif [ "$packageFormat" = deb ]
 then
     debTmpDir=$(mktemp -d)
     mkdir "$debTmpDir/opt" && cp -r "$outDir" "$debTmpDir/opt"
