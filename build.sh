@@ -91,10 +91,8 @@ cp "$srcDir/settings.py" "$outDir"
 cp "$srcDir/ui_"*.py "$outDir"
 cp "$thisScriptDir/LICENSE" "$outDir"
 mkdir "$outDir/translations" && cp "$srcDir/translations/"*.qm "$outDir/translations"
-
-echo Generating virtual environment...
-python3 -m venv --system-site-packages "$outDir/venv"
-"$outDir/venv/bin/pip3" install -r "$srcDir/requirements.txt"
+cp "$srcDir/requirements.txt" "$outDir"
+cp "$thisScriptDir/packaging/install-venv.sh" "$outDir"
 
 appVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
 if [ "$packageFormat" = tgz ]
