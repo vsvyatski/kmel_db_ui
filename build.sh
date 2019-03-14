@@ -95,6 +95,7 @@ cp "$srcDir/requirements.txt" "$outDir"
 cp "$thisScriptDir/packaging/install-venv.sh" "$outDir"
 
 appVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
+packageMaintainer="Vladimir Svyatski <vsvyatski@yandex.ru>"
 if [ "$packageFormat" = tgz ]
 then
     echo Creating tar.gz archive...
@@ -115,7 +116,7 @@ then
 
     cd "$debTmpDir"
 
-    fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "Vladimir Svyatski <vsvyatski@yandex.ru>" --category "utils" \
+    fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "$packageMaintainer" --category "utils" \
     --license GPL-3+ --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" --deb-installed-size 10750 \
     --deb-changelog "$thisScriptDir/packaging/deb/changelog" -d "python3-pyqt5 >= 5.5~" -d "python3-venv >= 3.5~" -d "python3-wheel >= 0.29~" --deb-recommends "qttranslations5-l10n >= 5.5~" \
     --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
@@ -123,21 +124,27 @@ then
     cd -
 elif [ "$packageFormat" = pacman ]
 then
-    pacmanTmpDir=$(mktemp -d)
-    mkdir "$pacmanTmpDir/opt" && cp -r "$outDir" "$pacmanTmpDir/opt"
-    mkdir -p "$pacmanTmpDir/usr/share/applications/" && cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$pacmanTmpDir/usr/share/applications"
-    
-    packageDescription="Kenwood Music Editor Light replacement for Linux systems"
-    # Let's define this explicitely, it seems to be important for Pacman (otherwise fpm will implicitely set this to 1)
-    iteration=1
+    # NOTE: fpm currently has a bug with --pacman-optional-depends, therefore makepkg is used.
 
-    cd "$pacmanTmpDir"
+#     pacmanTmpDir=$(mktemp -d)
+#     mkdir "$pacmanTmpDir/opt" && cp -r "$outDir" "$pacmanTmpDir/opt"
+#     mkdir -p "$pacmanTmpDir/usr/share/applications/" && cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$pacmanTmpDir/usr/share/applications"
+#     
+#     packageDescription="Kenwood Music Editor Light replacement for Linux systems"
+#     # Let's define this explicitely, it seems to be important for Pacman (otherwise fpm will implicitely set this to 1)
+#     iteration=1
+# 
+#     cd "$pacmanTmpDir"
+# 
+#     fpm -f -s dir -t pacman -p "$outDir/../kmeldb-ui-${appVersion}-${iteration}-any.pkg.tar.xz" -n kmeldb-ui -v ${appVersion} -m "$packageMaintainer" \
+#     --license GPL3 -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" --iteration $iteration \
+#     -d python-pyqt5 --pacman-optional-depends qt5-translations \
+#     --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
+#     
+#     cd -
 
-    fpm -f -s dir -t pacman -p "$outDir/../kmeldb-ui-${appVersion}-${iteration}-any.pkg.tar.xz" -n kmeldb-ui -v ${appVersion} -m "Vladimir Svyatski <vsvyatski@yandex.ru>" \
-    --license GPL3 -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" --iteration $iteration \
-    -d python-pyqt5 --pacman-optional-depends qt5-translations \
-    --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
-    
+    cd "$thisScriptDir/packaging/pacman"
+    makepkg -f PACKAGER="$packageMaintainer" APPOUTDIR="$outDir" PROJROOTDIR="$thisScriptDir" APPVERSION="$appVersion" BUILDDIR="$thisScriptDir/out" PKGDEST="$thisScriptDir/dist"
     cd -
 fi
 
