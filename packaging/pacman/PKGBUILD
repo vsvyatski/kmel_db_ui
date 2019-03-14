@@ -1,0 +1,21 @@
+pkgname=kmeldb-ui
+# This field cannot be empty, I'm putting an initial value here. But the real one will be calculated with pkgver().
+pkgver=0.3.0
+pkgrel=1
+pkgdesc="Kenwood Music Editor Light replacement for Linux systems"
+arch=('any')
+url="https://github.com/vsvyatski/kmel_db_ui"
+license=('GPL3')
+depends=('python-pyqt5')
+optdepends=('qt5-translations')
+install=install-actions.sh
+
+package() {
+    echo "$pkgdir"
+    mkdir "$pkgdir/opt" && cp -r "$APPOUTDIR" "$pkgdir/opt"
+    mkdir -p "$pkgdir/usr/share/applications/" && cp "$PROJROOTDIR/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$pkgdir/usr/share/applications"
+}
+
+pkgver() {
+    echo "$APPVERSION"
+}
