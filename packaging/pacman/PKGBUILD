@@ -11,7 +11,6 @@ optdepends=('qt5-translations')
 install=install-actions.sh
 
 package() {
-    echo "$pkgdir"
     mkdir "$pkgdir/opt" && cp -r "$APPOUTDIR" "$pkgdir/opt"
     mkdir -p "$pkgdir/usr/share/applications/" && cp "$PROJROOTDIR/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$pkgdir/usr/share/applications"
 }
