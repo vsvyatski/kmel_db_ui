@@ -26,10 +26,11 @@ usage() {
     echo 'options:'
     echo '  -h                   display this help message and exit'
     echo '  -p <target_format>   pack build results into target format'
-    echo '    supported formats:'
-    echo "      tgz - a *.tar.gz archive, it's distribution independent, but requires"
-    echo '            manual installation'
-    echo '      deb - a *.deb package for Debian and derivatives'
+    echo '     supported formats:'
+    echo "       tgz    - a *.tar.gz archive, it's distribution independent, but requires"
+    echo '                manual installation'
+    echo '       deb    - a *.deb package for Debian and derivatives'
+    echo '       pacman - a *.pkg.tar.xz package for ArchLinux and derivatives'
 }
 
 checkFormat() {
