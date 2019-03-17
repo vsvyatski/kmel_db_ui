@@ -6,14 +6,13 @@ A UI for the parser and generator for Kenwood Music Editor Light databases creat
 The application requires Python 3.5 or newer. Among packages it needs *PyQt5*, *asyncqt* and *hsaudiotag3k*.
 
 ## Building the application
-There is the *build.sh* file in the root folder of the repository. Running it will create the *dist/kmeldb-ui* folder which is an unpacked redistributable of the application. The build script also supports the **-p** flag that creates the *dist/kmeldb-ui.tar.gz* file, which is a packed redistributable. You can also use **-v \<version>** option together with **-p** to append the version number to the name of the archive. For instance, emitting
-```bash
-sh build.sh -p -v 0.2.0
-```
-will generate the *dist/kmeldb-ui-0.2.0.tar.gz* file.
+There is the *build.sh* file in the root folder of the repository. Running it will create the *dist/kmeldb-ui* folder which is an unpacked redistributable of the application. The build script also supports the **-p** option that packs the build results into a target format and places the package into the *dist* directory. Supported formats are:
+- *tgz* - a tar.gz archive, it's distribution independent, but requires manual installation
+- *deb* - a deb package for Debian and derivatives
+- *pacman* - a pkg.tar.xz package for ArchLinux and derivatives
 
-## Launching the program
-The distribution archive contains the *kenwooddbgen.sh* file. It's a launcher for the application. Just emit the following command in your terminal:
+## Manual installation
+If you choose to use tar.gz archive (because, for instance, you posess a Linux distribution using a package manager that do not understand Debian or ArchLinux packages), then you need to perform an additional step after unpacking the archive. There will be the *install-venv.sh* file in your destination folder. It needs to be laucned before the first use of the program in order to generate a Python virtual environment in the destination folder. The virtual environment is needed to run the application. The distribution archive contains the *kenwooddbgen.sh* file. It's a launcher for the program. Just emit the following command in your terminal:
 ```bash
 sh kenwooddbgen.sh
 ```
