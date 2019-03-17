@@ -1,3 +1,11 @@
+kmeldb-ui (0.3.0) unstable; urgency=low
+
+  [ Added ]
+  * DEB package for Debian, Ubuntu and derived systems
+  * pacman package for ArchLinux and derived systems
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 13:30:10 +0300
+
 kmeldb-ui (0.2.1) unstable; urgency=low
 
   [ Fixed ]

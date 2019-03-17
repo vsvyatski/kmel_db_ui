@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.3.0](https://github.com/vsvyatski/kmel_db_ui/tree/v0.3.0) (2019-03-17)
+
+**Added:**
+- DEB package for Debian, Ubuntu and derived systems
+- pacman package for ArchLinux and derived systems
+
 ## [v0.2.1](https://github.com/vsvyatski/kmel_db_ui/tree/v0.2.1) (2019-03-10)
 
 **Fixed:**
