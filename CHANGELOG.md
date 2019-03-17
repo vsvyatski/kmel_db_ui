@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.3.1](https://github.com/vsvyatski/kmel_db_ui/tree/v0.3.1) (2019-03-17)
+
+**Fixed:**
+- Build script to not include \_\_pycache\_\_
+
 ## [v0.3.0](https://github.com/vsvyatski/kmel_db_ui/tree/v0.3.0) (2019-03-17)
 
 **Added:**
