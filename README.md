@@ -6,6 +6,8 @@ A UI for the parser and generator for Kenwood Music Editor Light databases creat
 The application requires Python 3.5 or newer. Among packages it needs *PyQt5*, *asyncqt* and *hsaudiotag3k*.
 
 ## Building the application
+First of all, be sure to have [fpm](https://github.com/jordansissel/fpm) utility installed. It is needed to create certain packages.
+
 There is the *build.sh* file in the root folder of the repository. Running it will create the *dist/kmeldb-ui* folder which is an unpacked redistributable of the application. The build script also supports the **-p** option that packs the build results into a target format and places the package into the *dist* directory. Supported formats are:
 - *tgz* - a tar.gz archive, it's distribution independent, but requires manual installation
 - *deb* - a deb package for Debian and derivatives
