@@ -16,6 +16,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 
-APP_VERSION = '0.3.0'
+APP_VERSION = '0.3.2'
 APP_DIR = os.path.dirname(__file__)
 APP_NAME = 'Kenwood Database Generator'
