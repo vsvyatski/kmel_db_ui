@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.3.2](https://github.com/vsvyatski/kmel_db_ui/tree/v0.3.2) (2019-03-18)
+
+**Fixed:**
+- DEB package now has priority optional, because extra is deprecated
+- \_\_pycache\_\_ folder with appropriate permissions is created during the installation for Python to be able to generate precompiled bytecode
+
 ## [v0.3.1](https://github.com/vsvyatski/kmel_db_ui/tree/v0.3.1) (2019-03-17)
 
 **Fixed:**
