@@ -106,11 +106,11 @@ class MainWindow(QMainWindow):
         # We are going to try several known file managers if they are available. If any of them cannot be found,
         # then we'll just use xdg-open (but this will not select the file).
         cmd_list = None
-        for file_manager in ['dolphin', 'nemo', 'nautilus']:
+        for file_manager in ['dolphin', 'nautilus', 'nemo', 'thunar']:
             path_to_file_manager = os.path.join('/usr/bin', file_manager)
             if os.access(path_to_file_manager, os.X_OK):
                 args = [path_to_file_manager, os.path.join(drive_mount_point, 'kenwood.dap')]
-                if file_manager == 'dolphin':
+                if file_manager == 'dolphin' or file_manager == 'nautilus':
                     args.insert(1, '--select')
                 cmd_list = args
                 break
