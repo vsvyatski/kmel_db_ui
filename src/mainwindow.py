@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
         model.clear()
         for drive_info in driveutils.get_fat_usb_mounts():
             item = QStandardItem(QIcon(':/images/usbFlash'), drive_info.label)
-            item.setData(drive_info.mount_point)
+            item.setData((drive_info.mount_point, drive_info.device))
             model.appendRow(item)
 
         drive_selected = False
@@ -82,6 +82,14 @@ class MainWindow(QMainWindow):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
 
     def __getSelectedDriveMountPoint(self):
+        data = self.__getSelectedDriveData()
+        return data[0] if data is not None else None
+
+    def __getSelectedDriveDevice(self):
+        data = self.__getSelectedDriveData()
+        return data[1] if data is not None else None
+
+    def __getSelectedDriveData(self):
         selection_model = self.__ui.driveList.selectionModel()
         if not selection_model.hasSelection():
             return None
