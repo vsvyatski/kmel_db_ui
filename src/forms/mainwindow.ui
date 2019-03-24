@@ -221,6 +221,7 @@
    <addaction name="actionRefresh"/>
    <addaction name="actionWriteDatabase"/>
    <addaction name="actionViewDatabase"/>
+   <addaction name="actionUnmount"/>
    <addaction name="separator"/>
    <addaction name="actionClearLog"/>
   </widget>
@@ -237,9 +238,10 @@
     <property name="title">
      <string>&amp;Drive</string>
     </property>
-    <addaction name="actionWriteDatabase"/>
     <addaction name="actionRefresh"/>
+    <addaction name="actionWriteDatabase"/>
     <addaction name="actionViewDatabase"/>
+    <addaction name="actionUnmount"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -271,13 +273,13 @@
     <string>&amp;Refresh</string>
    </property>
    <property name="toolTip">
-    <string>Refresh Drive List</string>
+    <string>Refresh drive list</string>
    </property>
    <property name="whatsThis">
     <string/>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string notr="true">F5</string>
    </property>
   </action>
   <action name="actionWriteDatabase">
@@ -292,10 +294,10 @@
     <string>&amp;Write Database</string>
    </property>
    <property name="toolTip">
-    <string>Write Database to Drive</string>
+    <string>Write database to drive</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+W</string>
+    <string notr="true">Ctrl+W</string>
    </property>
   </action>
   <action name="actionViewDatabase">
@@ -313,7 +315,7 @@
     <string>View</string>
    </property>
    <property name="toolTip">
-    <string>View Database on Drive</string>
+    <string>View database on drive</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -336,13 +338,16 @@
    <property name="text">
     <string>C&amp;lear Output</string>
    </property>
+   <property name="toolTip">
+    <string>Clear output</string>
+   </property>
   </action>
   <action name="actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -360,10 +365,10 @@
     <string>Preferences</string>
    </property>
    <property name="toolTip">
-    <string>Edit Preferences</string>
+    <string>Edit preferences</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+,</string>
+    <string notr="true">Ctrl+,</string>
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>
@@ -375,6 +380,24 @@
    </property>
    <property name="iconText">
     <string>View on Github</string>
+   </property>
+   <property name="toolTip">
+    <string>View repository on Github</string>
+   </property>
+  </action>
+  <action name="actionUnmount">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../appresources.qrc">
+     <normaloff>:/actions/unmount</normaloff>:/actions/unmount</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Safely Remove</string>
+   </property>
+   <property name="toolTip">
+    <string>Safely remove the selected device</string>
    </property>
   </action>
  </widget>

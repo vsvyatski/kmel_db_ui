@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/actions">
+    <file alias="unmount">images/unmount.png</file>
     <file alias="preferences">images/preferences.png</file>
     <file alias="info">images/info.png</file>
     <file alias="clear">images/clear.png</file>
