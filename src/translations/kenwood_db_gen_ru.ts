@@ -30,9 +30,22 @@
     </message>
 </context>
 <context>
+    <name>DriveUtils</name>
+    <message>
+        <location filename="../driveutils.py" line="93"/>
+        <source>Invalid D-Bus interface</source>
+        <translation>Неверный интерфейс D-Bus</translation>
+    </message>
+    <message>
+        <location filename="../driveutils.py" line="100"/>
+        <source>Unexpected reply from Udisks</source>
+        <translation>Неожиданный ответ от Udisks</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.py" line="198"/>
+        <location filename="../mainwindow.py" line="209"/>
         <source>Process finished with exit code %d
 
 </source>
@@ -41,139 +54,189 @@
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.py" line="231"/>
+        <location filename="../mainwindow.py" line="244"/>
         <source>Unable to navigate to the Github repository with the default browser.</source>
         <translation>Не удаётся перейти к репозиторию Github с помощью браузера по умолчанию.</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="185"/>
+        <location filename="../ui_mainwindow.py" line="201"/>
         <source>Kenwood Database Generator</source>
         <translation>Kenwood Database Generator</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="186"/>
+        <location filename="../ui_mainwindow.py" line="202"/>
         <source>&amp;USB Drives</source>
         <translation>&amp;USB диски</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="187"/>
+        <location filename="../ui_mainwindow.py" line="203"/>
         <source>Terminal &amp;Output</source>
         <translation>&amp;Вывод терминала</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="189"/>
+        <location filename="../ui_mainwindow.py" line="205"/>
         <source>&amp;Drive</source>
         <translation>&amp;Диск</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="190"/>
+        <location filename="../ui_mainwindow.py" line="206"/>
         <source>&amp;Edit</source>
         <translation>&amp;Редактировать</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="191"/>
+        <location filename="../ui_mainwindow.py" line="207"/>
         <source>&amp;Help</source>
         <translation>&amp;Помощь</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="192"/>
+        <location filename="../ui_mainwindow.py" line="208"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Обновить</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="193"/>
+        <location filename="../ui_mainwindow.py" line="208"/>
         <source>Refresh Drive List</source>
-        <translation>Обновить список дисков</translation>
+        <translation type="obsolete">Обновить список дисков</translation>
     </message>
     <message>
         <location filename="../ui_mainwindow.py" line="194"/>
         <source>Ctrl+R</source>
-        <translation>Ctrl+R</translation>
+        <translation type="obsolete">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="195"/>
+        <location filename="../ui_mainwindow.py" line="210"/>
         <source>&amp;Write Database</source>
         <translation>&amp;Записать базу данных</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="196"/>
+        <location filename="../ui_mainwindow.py" line="210"/>
         <source>Write Database to Drive</source>
-        <translation>Записать базу данных на диск</translation>
+        <translation type="obsolete">Записать базу данных на диск</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="197"/>
+        <location filename="../ui_mainwindow.py" line="208"/>
         <source>Ctrl+W</source>
-        <translation>Ctrl+W</translation>
+        <translation type="obsolete">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="198"/>
+        <location filename="../ui_mainwindow.py" line="212"/>
         <source>&amp;View Database</source>
         <translation>&amp;Просмотреть базу данных</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="199"/>
+        <location filename="../ui_mainwindow.py" line="213"/>
         <source>View</source>
         <translation>Просмотр</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="200"/>
+        <location filename="../ui_mainwindow.py" line="213"/>
         <source>View Database on Drive</source>
-        <translation>Просмотр базы данных на диске</translation>
+        <translation type="obsolete">Просмотр базы данных на диске</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="201"/>
+        <location filename="../ui_mainwindow.py" line="215"/>
         <source>&amp;About</source>
         <translation>&amp;О программе</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="202"/>
+        <location filename="../ui_mainwindow.py" line="216"/>
         <source>C&amp;lear Output</source>
         <translation>&amp;Очистить вывод</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="203"/>
+        <location filename="../ui_mainwindow.py" line="218"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выйти</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="204"/>
+        <location filename="../ui_mainwindow.py" line="215"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl+Q</translation>
+        <translation type="obsolete">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="205"/>
+        <location filename="../ui_mainwindow.py" line="219"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Предпочтения...</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="207"/>
+        <location filename="../ui_mainwindow.py" line="219"/>
         <source>Edit Preferences</source>
-        <translation>Редактировать предпочтения</translation>
+        <translation type="obsolete">Редактировать предпочтения</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="208"/>
+        <location filename="../ui_mainwindow.py" line="219"/>
         <source>Ctrl+,</source>
-        <translation>Ctrl+,</translation>
+        <translation type="obsolete">Ctrl+,</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="209"/>
+        <location filename="../ui_mainwindow.py" line="222"/>
         <source>&amp;View Repository on Github</source>
         <translation>П&amp;росмотреть репозиторий на Github</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="210"/>
+        <location filename="../ui_mainwindow.py" line="223"/>
         <source>View on Github</source>
         <translation>Просмотр на Github</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="188"/>
+        <location filename="../ui_mainwindow.py" line="204"/>
         <source>Main Toolbar</source>
         <translation>Главная панель инструментов</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="206"/>
+        <location filename="../ui_mainwindow.py" line="220"/>
         <source>Preferences</source>
         <translation>Предпочтения</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="225"/>
+        <source>&amp;Safely Remove</source>
+        <translation>&amp;Безопасно извлечь</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="226"/>
+        <source>Safely remove the selected device</source>
+        <translation>Безопасно извлечь выбранное устройство</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="209"/>
+        <source>Refresh drive list</source>
+        <translation>Обновить список дисков</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="211"/>
+        <source>Write database to drive</source>
+        <translation>Записать базу данных на диск</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="214"/>
+        <source>View database on drive</source>
+        <translation>Просмотр базы данных на диске</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="217"/>
+        <source>Clear output</source>
+        <translation>Очистить вывод</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="221"/>
+        <source>Edit preferences</source>
+        <translation>Редактировать предпочтения</translation>
+    </message>
+    <message>
+        <location filename="../ui_mainwindow.py" line="224"/>
+        <source>View repository on Github</source>
+        <translation>Просмотреть репозиторий на Github</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.py" line="261"/>
+        <source>Unable to unmount the device:&lt;br/&gt;&lt;br/&gt;&lt;i&gt;%s&lt;/i&gt;</source>
+        <translation>Не удаётся извлечь устройство:&lt;br/&gt;&lt;br/&gt;&lt;i&gt;%s&lt;/i&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.py" line="266"/>
+        <source>Internal error occurred.</source>
+        <translation>Произошла внутренняя ошибка.</translation>
     </message>
 </context>
 <context>
