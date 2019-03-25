@@ -30,9 +30,22 @@
     </message>
 </context>
 <context>
+    <name>DriveUtils</name>
+    <message>
+        <location filename="../driveutils.py" line="93"/>
+        <source>Invalid D-Bus interface</source>
+        <translation>Invalid D-Bus interface</translation>
+    </message>
+    <message>
+        <location filename="../driveutils.py" line="100"/>
+        <source>Unexpected reply from Udisks</source>
+        <translation>Unexpected reply from Udisks</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.py" line="206"/>
+        <location filename="../mainwindow.py" line="209"/>
         <source>Process finished with exit code %d
 
 </source>
@@ -41,42 +54,42 @@
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.py" line="239"/>
+        <location filename="../mainwindow.py" line="244"/>
         <source>Unable to navigate to the Github repository with the default browser.</source>
         <translation>Unable to navigate to the Github repository with the default browser.</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="200"/>
+        <location filename="../ui_mainwindow.py" line="201"/>
         <source>Kenwood Database Generator</source>
         <translation>Kenwood Database Generator</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="201"/>
+        <location filename="../ui_mainwindow.py" line="202"/>
         <source>&amp;USB Drives</source>
         <translation>&amp;USB Drives</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="202"/>
+        <location filename="../ui_mainwindow.py" line="203"/>
         <source>Terminal &amp;Output</source>
         <translation>Terminal &amp;Output</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="204"/>
+        <location filename="../ui_mainwindow.py" line="205"/>
         <source>&amp;Drive</source>
         <translation>&amp;Drive</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="205"/>
+        <location filename="../ui_mainwindow.py" line="206"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edit</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="206"/>
+        <location filename="../ui_mainwindow.py" line="207"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="207"/>
+        <location filename="../ui_mainwindow.py" line="208"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Refresh</translation>
     </message>
@@ -91,7 +104,7 @@
         <translation type="obsolete">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="209"/>
+        <location filename="../ui_mainwindow.py" line="210"/>
         <source>&amp;Write Database</source>
         <translation>&amp;Write Database</translation>
     </message>
@@ -106,12 +119,12 @@
         <translation type="obsolete">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="211"/>
+        <location filename="../ui_mainwindow.py" line="212"/>
         <source>&amp;View Database</source>
         <translation>&amp;View Database</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="212"/>
+        <location filename="../ui_mainwindow.py" line="213"/>
         <source>View</source>
         <translation>View</translation>
     </message>
@@ -121,17 +134,17 @@
         <translation type="obsolete">View Database on Drive</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="214"/>
+        <location filename="../ui_mainwindow.py" line="215"/>
         <source>&amp;About</source>
         <translation>&amp;About</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="215"/>
+        <location filename="../ui_mainwindow.py" line="216"/>
         <source>C&amp;lear Output</source>
         <translation>C&amp;lear Output</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="217"/>
+        <location filename="../ui_mainwindow.py" line="218"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quit</translation>
     </message>
@@ -141,7 +154,7 @@
         <translation type="obsolete">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="218"/>
+        <location filename="../ui_mainwindow.py" line="219"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Preferences...</translation>
     </message>
@@ -156,64 +169,74 @@
         <translation type="obsolete">Ctrl+,</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="221"/>
+        <location filename="../ui_mainwindow.py" line="222"/>
         <source>&amp;View Repository on Github</source>
         <translation>&amp;View Repository on Github</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="222"/>
+        <location filename="../ui_mainwindow.py" line="223"/>
         <source>View on Github</source>
         <translation>View on Github</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="203"/>
+        <location filename="../ui_mainwindow.py" line="204"/>
         <source>Main Toolbar</source>
         <translation>Main Toolbar</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="219"/>
+        <location filename="../ui_mainwindow.py" line="220"/>
         <source>Preferences</source>
         <translation>Preferences</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="224"/>
+        <location filename="../ui_mainwindow.py" line="225"/>
         <source>&amp;Safely Remove</source>
         <translation>&amp;Safely Remove</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="225"/>
+        <location filename="../ui_mainwindow.py" line="226"/>
         <source>Safely remove the selected device</source>
         <translation>Safely remove the selected device</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="208"/>
+        <location filename="../ui_mainwindow.py" line="209"/>
         <source>Refresh drive list</source>
         <translation>Refresh drive list</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="210"/>
+        <location filename="../ui_mainwindow.py" line="211"/>
         <source>Write database to drive</source>
         <translation>Write database to drive</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="213"/>
+        <location filename="../ui_mainwindow.py" line="214"/>
         <source>View database on drive</source>
         <translation>View database on drive</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="216"/>
+        <location filename="../ui_mainwindow.py" line="217"/>
         <source>Clear output</source>
         <translation>Clear output</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="220"/>
+        <location filename="../ui_mainwindow.py" line="221"/>
         <source>Edit preferences</source>
         <translation>Edit preferences</translation>
     </message>
     <message>
-        <location filename="../ui_mainwindow.py" line="223"/>
+        <location filename="../ui_mainwindow.py" line="224"/>
         <source>View repository on Github</source>
         <translation>View repository on Github</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.py" line="261"/>
+        <source>Unable to unmount the device:&lt;br/&gt;&lt;br/&gt;&lt;i&gt;%s&lt;/i&gt;</source>
+        <translation>Unable to unmount the device:&lt;br/&gt;&lt;br/&gt;&lt;i&gt;%s&lt;/i&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.py" line="266"/>
+        <source>Internal error occurred.</source>
+        <translation>Internal error occurred.</translation>
     </message>
 </context>
 <context>

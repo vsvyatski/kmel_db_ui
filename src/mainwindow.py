@@ -15,6 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import asyncio
+import html
+import logging
 import os
 import subprocess
 import sys
@@ -56,7 +58,7 @@ class MainWindow(QMainWindow):
         model.clear()
         for drive_info in driveutils.get_fat_usb_mounts():
             item = QStandardItem(QIcon(':/images/usbFlash'), drive_info.label)
-            item.setData((drive_info.mount_point, drive_info.device))
+            item.setData(drive_info)
             model.appendRow(item)
 
         drive_selected = False
@@ -71,6 +73,7 @@ class MainWindow(QMainWindow):
     def __changeActionAvailabilityBasedOnDriveSelection(self, drive_selected: bool):
         self.__ui.actionWriteDatabase.setEnabled(drive_selected)
         self.__ui.actionViewDatabase.setEnabled(drive_selected)
+        self.__ui.actionUnmount.setEnabled(drive_selected)
 
     @pyqtSlot()
     def refreshActionTriggered(self):
@@ -83,11 +86,11 @@ class MainWindow(QMainWindow):
 
     def __getSelectedDriveMountPoint(self):
         data = self.__getSelectedDriveData()
-        return data[0] if data is not None else None
+        return data.mount_point if data is not None else None
 
     def __getSelectedDriveDevice(self):
         data = self.__getSelectedDriveData()
-        return data[1] if data is not None else None
+        return data.device if data is not None else None
 
     def __getSelectedDriveData(self):
         selection_model = self.__ui.driveList.selectionModel()
@@ -209,9 +212,11 @@ class MainWindow(QMainWindow):
 
     def __uiBeginGenerateOperation(self):
         self.__ui.actionWriteDatabase.setEnabled(False)
+        self.__ui.actionUnmount.setEnabled(False)
 
     def __uiEndGenerateOperation(self):
         self.__ui.actionWriteDatabase.setEnabled(True)
+        self.__ui.actionUnmount.setEnabled(True)
 
     @pyqtSlot()
     def aboutActionTriggered(self):
@@ -244,3 +249,17 @@ class MainWindow(QMainWindow):
         preferences_dialog = preferencesdialog.PreferencesDialog(self.__app_settings, self)
         if preferences_dialog.exec() == QDialog.Accepted:
             self.__ui.toolBar.setVisible(self.__app_settings.show_toolbar)
+
+    @pyqtSlot()
+    def unmountActionTriggered(self):
+        drive_device = self.__getSelectedDriveDevice()
+        try:
+            driveutils.unmount_usb_device(drive_device)
+            self.__loadUsbDrivesIntoView()
+        except RuntimeError as err:
+            QMessageBox.critical(self, info.APP_NAME,
+                                 _translate('MainWindow',
+                                            'Unable to unmount the device:<br/><br/><i>%s</i>') % html.escape(err))
+        except (TypeError, ValueError) as err:
+            logging.error(err)
+            QMessageBox.critical(self, info.APP_NAME, _translate('MainWindow', 'Internal error occurred.'))

@@ -193,6 +193,7 @@ class Ui_MainWindow(object):
         self.actionQuit.triggered.connect(MainWindow.close)
         self.actionViewOnGithub.triggered.connect(MainWindow.viewOnGithubActionTriggered)
         self.actionPreferences.triggered.connect(MainWindow.preferencesActionTriggered)
+        self.actionUnmount.triggered.connect(MainWindow.unmountActionTriggered)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
