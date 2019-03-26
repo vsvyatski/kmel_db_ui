@@ -7,7 +7,7 @@ kmeldb-ui (0.3.2) unstable; urgency=medium
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Mon, 18 Mar 2019 23:33:40 +0300
 
  
-kmeldb-ui (0.3.1) unstable; urgency=low
+kmeldb-ui (0.3.1) unstable; urgency=medium
 
   [ Fixed ]
   * Build script to not include __pycache__
@@ -15,7 +15,7 @@ kmeldb-ui (0.3.1) unstable; urgency=low
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 14:17:05 +0300
 
 
-kmeldb-ui (0.3.0) unstable; urgency=low
+kmeldb-ui (0.3.0) unstable; urgency=medium
 
   [ Added ]
   * DEB package for Debian, Ubuntu and derived systems
@@ -24,7 +24,7 @@ kmeldb-ui (0.3.0) unstable; urgency=low
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 13:30:10 +0300
 
 
-kmeldb-ui (0.2.1) unstable; urgency=low
+kmeldb-ui (0.2.1) unstable; urgency=medium
 
   [ Fixed ]
   * A typo in the changelog
@@ -32,7 +32,7 @@ kmeldb-ui (0.2.1) unstable; urgency=low
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 10 Mar 2019 16:19:45 +0300
 
 
-kmeldb-ui (0.2.0) unstable; urgency=low
+kmeldb-ui (0.2.0) unstable; urgency=medium
 
   [ Added ]
   * User interface improvements
@@ -44,7 +44,7 @@ kmeldb-ui (0.2.0) unstable; urgency=low
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 10 Mar 2019 15:56:00 +0300
 
 
-kmeldb-ui (0.1.0) unstable; urgency=low
+kmeldb-ui (0.1.0) unstable; urgency=medium
 
   * Initial application release.
 
