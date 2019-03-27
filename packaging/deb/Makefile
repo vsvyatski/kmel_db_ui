@@ -1,8 +1,11 @@
-BINDIR := /usr/bin
+OPTDIR := opt
+SHAREDIR := usr/share
 
 all:
-	gcc main.c -o my_hello_world
+	@echo Building is not required for this package.
 
 install:
-	mkdir -p ${DESTDIR}${BINDIR}
-	cp my_hello_world ${DESTDIR}${BINDIR}/
+	mkdir -p ${DESTDIR}/${OPTDIR}
+	cp -r kmeldb-ui ${DESTDIR}/${OPTDIR}
+	mkdir -p ${DESTDIR}/${SHAREDIR}/applications
+	cp com.github.vsvyatski.kmeldb-ui.desktop ${DESTDIR}/${SHAREDIR}/applications
