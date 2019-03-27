@@ -1,3 +1,11 @@
+kmeldb-ui (0.4.0) unstable; urgency=low
+
+  [ Added ]
+  * Ability to safely remove a USB device from the user interface
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Wed, 27 Mar 2019 20:31:20 +0300
+
+
 kmeldb-ui (0.3.2) unstable; urgency=medium
 
   [ Fixed ]
@@ -15,7 +23,7 @@ kmeldb-ui (0.3.1) unstable; urgency=medium
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 14:17:05 +0300
 
 
-kmeldb-ui (0.3.0) unstable; urgency=medium
+kmeldb-ui (0.3.0) unstable; urgency=low
 
   [ Added ]
   * DEB package for Debian, Ubuntu and derived systems
@@ -24,7 +32,7 @@ kmeldb-ui (0.3.0) unstable; urgency=medium
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 13:30:10 +0300
 
 
-kmeldb-ui (0.2.1) unstable; urgency=medium
+kmeldb-ui (0.2.1) unstable; urgency=low
 
   [ Fixed ]
   * A typo in the changelog
@@ -32,7 +40,7 @@ kmeldb-ui (0.2.1) unstable; urgency=medium
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 10 Mar 2019 16:19:45 +0300
 
 
-kmeldb-ui (0.2.0) unstable; urgency=medium
+kmeldb-ui (0.2.0) unstable; urgency=low
 
   [ Added ]
   * User interface improvements
@@ -44,7 +52,7 @@ kmeldb-ui (0.2.0) unstable; urgency=medium
  -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 10 Mar 2019 15:56:00 +0300
 
 
-kmeldb-ui (0.1.0) unstable; urgency=medium
+kmeldb-ui (0.1.0) unstable; urgency=low
 
   * Initial application release.
 
