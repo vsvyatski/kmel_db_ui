@@ -8,3 +8,5 @@ then
     [ -d /opt/kmeldb-ui/__pycache__ ] && rm -r /opt/kmeldb-ui/__pycache__
     [ -d /opt/kmeldb-ui/kmeldb_cli/kmeldb/__pycache__ ] && rm -r /opt/kmeldb-ui/kmeldb_cli/kmeldb/__pycache__
 fi
+
+#DEBHELPER#
