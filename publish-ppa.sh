@@ -27,7 +27,7 @@ usage() {
     echo '  -h                      display this help message and exit'
     echo '  -d <distribution_tag>   publish for a given distribution'
     echo '     supported distributions:'
-    echo '       xenial - Xenial Xerus (16.04.* LTS)'
+    echo '       xenial - Xenial Xerus (16.04.* LTS). Used as a default if -d is not provided'
     echo '       bionic - Bionic Beaver (18.04.* LTS)'
 }
 
