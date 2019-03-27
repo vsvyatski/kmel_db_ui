@@ -120,7 +120,7 @@ then
     fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "$packageMaintainer" --category "utils" --deb-priority optional \
     --license GPL-3 --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" --deb-installed-size 6342 \
     --deb-changelog "$thisScriptDir/packaging/deb/debian/changelog" -d "python3-pyqt5 >= 5.5~" -d "python3-venv >= 3.5~" -d "python3-wheel >= 0.29~" --deb-recommends "qttranslations5-l10n >= 5.5~" \
-    --after-install "$thisScriptDir/packaging/after-install.sh" --before-remove "$thisScriptDir/packaging/before-remove.sh" .
+    --after-install "$thisScriptDir/packaging/deb/debian/postinst" --before-remove "$thisScriptDir/packaging/deb/debian/prerm" .
     
     cd -
 elif [ "$packageFormat" = pacman ]
