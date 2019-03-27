@@ -48,7 +48,7 @@ while getopts ":p:h" opt; do
 			packageFormat=$OPTARG
 			if ! checkFormat $packageFormat
 			then
-                printf "${clr_red}ERROR: Unrecognized target package format \"$packageFormat\".${clr_end}\n" 1>&2
+                printf "${clr_red}ERROR: Unrecognized target package format '$packageFormat'.${clr_end}\n" 1>&2
                 usage
                 exit 1
 			fi

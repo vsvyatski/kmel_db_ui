@@ -19,6 +19,53 @@ else
 	clr_end=''
 fi
 
+usage() {
+    echo 'Usage:'
+    echo '  publish-ppa.sh [options]'
+    echo
+    echo 'options:'
+    echo '  -h                      display this help message and exit'
+    echo '  -d <distribution_tag>   publish for a given distribution'
+    echo '     supported distributions:'
+    echo '       xenial - Xenial Xerus (16.04.* LTS)'
+    echo '       bionic - Bionic Beaver (18.04.* LTS)'
+}
+
+checkDistribution() {
+    test $1 = xenial -o $1 = bionic
+}
+
+# Xenial Xerus (the oldest supported distribution) is the default for this script if not told otherwise
+distributionTag=xenial
+
+while getopts ":d:h" opt; do
+	case ${opt} in
+	    h)
+	        usage
+	        exit
+	        ;;
+		d)
+			distributionTag=$OPTARG
+			if ! checkDistribution $distributionTag
+			then
+                printf "${clr_red}ERROR: Unrecognized Ubuntu distribution '$distributionTag'.${clr_end}\n" 1>&2
+                usage
+                exit 1
+			fi
+			;;
+		\?)
+			printf "${clr_red}ERROR: Unrecognized option -$OPTARG.${clr_end}\n" 1>&2
+			usage
+			exit 1
+			;;
+		:)
+			printf "${clr_red}ERROR: Option -$OPTARG requires an argument.${clr_end}\n" 1>&2
+			usage
+			exit 1
+			;;
+	esac
+done
+
 thisScriptDir=$(dirname "$0")
 
 # First of all we need to build the distribution
@@ -44,8 +91,8 @@ else
 fi
 
 echo Preparing source package...
-cp -r "$thisScriptDir/packaging/deb/unstable/debian" "$packageSrcDir"
-cp "$thisScriptDir/packaging/deb/unstable/Makefile" "$packageSrcDir"
+cp -r "$thisScriptDir/packaging/deb/$distributionTag/debian" "$packageSrcDir"
+cp "$thisScriptDir/packaging/deb/$distributionTag/Makefile" "$packageSrcDir"
 # Let's copy the distribution files
 cp -r "$thisScriptDir/dist/kmeldb-ui" "$packageSrcDir"
 cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$packageSrcDir"
