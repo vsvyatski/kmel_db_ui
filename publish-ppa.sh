@@ -44,8 +44,8 @@ else
 fi
 
 echo Preparing source package...
-cp -r "$thisScriptDir/packaging/deb/debian" "$packageSrcDir"
-cp "$thisScriptDir/packaging/deb/Makefile" "$packageSrcDir"
+cp -r "$thisScriptDir/packaging/deb/unstable/debian" "$packageSrcDir"
+cp "$thisScriptDir/packaging/deb/unstable/Makefile" "$packageSrcDir"
 # Let's copy the distribution files
 cp -r "$thisScriptDir/dist/kmeldb-ui" "$packageSrcDir"
 cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$packageSrcDir"
