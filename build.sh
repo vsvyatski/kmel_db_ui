@@ -93,7 +93,7 @@ cp "$srcDir/ui_"*.py "$outDir"
 cp "$thisScriptDir/LICENSE" "$outDir"
 mkdir "$outDir/translations" && cp "$srcDir/translations/"*.qm "$outDir/translations"
 cp "$srcDir/requirements.txt" "$outDir"
-cp "$thisScriptDir/packaging/install-venv.sh" "$outDir"
+cp "$thisScriptDir/packaging/create-venv.sh" "$outDir"
 
 appVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
 packageMaintainer="Vladimir Svyatski <vsvyatski@yandex.ru>"
