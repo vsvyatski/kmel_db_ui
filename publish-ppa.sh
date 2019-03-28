@@ -81,7 +81,8 @@ echo
 echo Finished application build.
 
 outDir="$thisScriptDir/out/ppa"
-packageVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
+packageVersion=$(dpkg-parsechangelog -l "$thisScriptDir/packaging/deb/$distributionTag/debian/changelog" --show-field Version)
+appVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
 packageSrcDir="$outDir/kmeldb-ui_$packageVersion"
 if [ ! -d "$packageSrcDir" ]
 then
@@ -91,8 +92,14 @@ else
 fi
 
 echo Preparing source package...
-cp -r "$thisScriptDir/packaging/deb/$distributionTag/debian" "$packageSrcDir"
-cp "$thisScriptDir/packaging/deb/$distributionTag/Makefile" "$packageSrcDir"
 # Let's copy the distribution files
 cp -r "$thisScriptDir/dist/kmeldb-ui" "$packageSrcDir"
 cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$packageSrcDir"
+# Let's copy Makefile
+cp "$thisScriptDir/packaging/deb/$distributionTag/Makefile" "$packageSrcDir"
+# We have things ready to create an orig.tar.xz archive
+cd "$packageSrcDir"
+tar -cJf "../kmeldb-ui_$appVersion.orig.tar.xz" *
+cd -
+# And finally, let's copy the debian directory
+cp -r "$thisScriptDir/packaging/deb/$distributionTag/debian" "$packageSrcDir"
