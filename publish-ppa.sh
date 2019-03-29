@@ -103,3 +103,9 @@ tar -cJf "../kmeldb-ui_$appVersion.orig.tar.xz" *
 cd -
 # And finally, let's copy the debian directory
 cp -r "$thisScriptDir/packaging/deb/$distributionTag/debian" "$packageSrcDir"
+
+echo Building package...
+gpgKeyId=551726B7CE345449
+cd "$packageSrcDir"
+debuild -S --sign-key=$gpgKeyId
+cd -
