@@ -118,7 +118,7 @@ then
     cd "$debTmpDir"
 
     fpm -f -s dir -t deb -p "$outDir/../kmeldb-ui_${appVersion}_all.deb" -n kmeldb-ui -v ${appVersion} -m "$packageMaintainer" --category "utils" --deb-priority optional \
-    --license GPL-3 --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" --deb-installed-size 6342 \
+    --license GPL-3 --vendor "Vladimir Svyatski" -a all --url https://github.com/vsvyatski/kmeldb-ui --description "$packageDescription" --deb-installed-size 6342 \
     --deb-changelog "$thisScriptDir/packaging/deb/changelog" -d "python3-pyqt5 >= 5.5~" -d "python3-venv >= 3.5~" -d "python3-wheel >= 0.29~" --deb-recommends "qttranslations5-l10n >= 5.5~" \
     --after-install "$thisScriptDir/packaging/deb/postinst" --before-remove "$thisScriptDir/packaging/deb/prerm" .
     
@@ -138,7 +138,7 @@ then
 #     cd "$pacmanTmpDir"
 # 
 #     fpm -f -s dir -t pacman -p "$outDir/../kmeldb-ui-${appVersion}-${iteration}-any.pkg.tar.xz" -n kmeldb-ui -v ${appVersion} -m "$packageMaintainer" \
-#     --license GPL3 -a all --url https://github.com/vsvyatski/kmel_db_ui --description "$packageDescription" --iteration $iteration \
+#     --license GPL3 -a all --url https://github.com/vsvyatski/kmeldb-ui --description "$packageDescription" --iteration $iteration \
 #     -d python-pyqt5 --pacman-optional-depends qt5-translations \
 #     --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
 #     
