@@ -14,5 +14,3 @@ chmod 777 ./kmeldb_cli/kmeldb/__pycache__
 sh ./create-venv.sh
 
 cd -
-
-#DEBHELPER#
