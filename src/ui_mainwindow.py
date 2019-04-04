@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file '../forms/mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -152,8 +153,8 @@ class Ui_MainWindow(object):
         self.actionPreferences.setShortcut("Ctrl+,")
         self.actionPreferences.setMenuRole(QtWidgets.QAction.PreferencesRole)
         self.actionPreferences.setObjectName("actionPreferences")
-        self.actionViewOnGithub = QtWidgets.QAction(MainWindow)
-        self.actionViewOnGithub.setObjectName("actionViewOnGithub")
+        self.actionVisitWebsite = QtWidgets.QAction(MainWindow)
+        self.actionVisitWebsite.setObjectName("actionVisitWebsite")
         self.actionUnmount = QtWidgets.QAction(MainWindow)
         self.actionUnmount.setEnabled(False)
         icon7 = QtGui.QIcon()
@@ -176,7 +177,7 @@ class Ui_MainWindow(object):
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionPreferences)
         self.menuHelp.addAction(self.actionAbout)
-        self.menuHelp.addAction(self.actionViewOnGithub)
+        self.menuHelp.addAction(self.actionVisitWebsite)
         self.menuBar.addAction(self.menuDrive.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
@@ -191,7 +192,7 @@ class Ui_MainWindow(object):
         self.actionWriteDatabase.triggered.connect(MainWindow.writeDatabaseActionTriggered)
         self.actionAbout.triggered.connect(MainWindow.aboutActionTriggered)
         self.actionQuit.triggered.connect(MainWindow.close)
-        self.actionViewOnGithub.triggered.connect(MainWindow.viewOnGithubActionTriggered)
+        self.actionVisitWebsite.triggered.connect(MainWindow.visitWebsiteActionTriggered)
         self.actionPreferences.triggered.connect(MainWindow.preferencesActionTriggered)
         self.actionUnmount.triggered.connect(MainWindow.unmountActionTriggered)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -219,10 +220,11 @@ class Ui_MainWindow(object):
         self.actionPreferences.setText(_translate("MainWindow", "&Preferences..."))
         self.actionPreferences.setIconText(_translate("MainWindow", "Preferences"))
         self.actionPreferences.setToolTip(_translate("MainWindow", "Edit preferences"))
-        self.actionViewOnGithub.setText(_translate("MainWindow", "&View Repository on Github"))
-        self.actionViewOnGithub.setIconText(_translate("MainWindow", "View on Github"))
-        self.actionViewOnGithub.setToolTip(_translate("MainWindow", "View repository on Github"))
+        self.actionVisitWebsite.setText(_translate("MainWindow", "&Visit Website"))
+        self.actionVisitWebsite.setIconText(_translate("MainWindow", "Website"))
+        self.actionVisitWebsite.setToolTip(_translate("MainWindow", "Open program website with your browser"))
         self.actionUnmount.setText(_translate("MainWindow", "&Safely Remove"))
         self.actionUnmount.setToolTip(_translate("MainWindow", "Safely remove the selected device"))
+
 
 import appresources_rc

@@ -238,8 +238,8 @@ class MainWindow(QMainWindow):
         super().closeEvent(event)
 
     @pyqtSlot()
-    def viewOnGithubActionTriggered(self):
-        if not QDesktopServices.openUrl(QUrl('https://github.com/vsvyatski/kmel_db_ui')):
+    def visitWebsiteActionTriggered(self):
+        if not QDesktopServices.openUrl(QUrl('https://vsvyatski.github.io/kmeldb-ui')):
             QMessageBox.critical(self, info.APP_NAME,
                                  _translate('MainWindow',
                                             'Unable to navigate to the Github repository with the default browser.'))
