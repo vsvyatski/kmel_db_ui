@@ -10,7 +10,7 @@ post_install() {
     mkdir ./kmeldb_cli/kmeldb/__pycache__
     chmod 777 ./kmeldb_cli/kmeldb/__pycache__
 
-    sh ./install-venv.sh
+    sh ./create-venv.sh
 
     cd -
 }

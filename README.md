@@ -14,7 +14,7 @@ There is the *build.sh* file in the root folder of the repository. Running it wi
 - *pacman* - a pkg.tar.xz package for ArchLinux and derivatives
 
 ## Manual installation
-If you choose to use tar.gz archive (because, for instance, you posess a Linux distribution using a package manager that do not understand Debian or ArchLinux packages), then you need to perform an additional step after unpacking the archive. There will be the *install-venv.sh* file in your destination folder. It needs to be laucned before the first use of the program in order to generate a Python virtual environment in the destination folder. The virtual environment is needed to run the application. The distribution archive contains the *kenwooddbgen.sh* file. It's a launcher for the program. Just emit the following command in your terminal:
+If you choose to use tar.gz archive (because, for instance, you posess a Linux distribution using a package manager that do not understand Debian or ArchLinux packages), then you need to perform an additional step after unpacking the archive. There will be the *create-venv.sh* file in your destination folder. It needs to be laucned before the first use of the program in order to generate a Python virtual environment in the destination folder. The virtual environment is needed to run the application. The distribution archive contains the *kenwooddbgen.sh* file. It's a launcher for the program. Just emit the following command in your terminal:
 ```bash
 sh kenwooddbgen.sh
 ```

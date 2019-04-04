@@ -18,7 +18,12 @@ import glob
 import os
 from typing import List
 
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtDBus import QDBusInterface, QDBusConnection, QDBusMessage
+
 import kmeldb_cli.kmeldb.mounts
+
+_translate = QCoreApplication.translate
 
 
 class UsbDriveInfo:
@@ -67,3 +72,29 @@ def get_fat_usb_mounts() -> List[UsbDriveInfo]:
         if is_usb_device(fat_mount[2]):
             usb_drives.append(UsbDriveInfo(fat_mount[0], fat_mount[2]))
     return usb_drives
+
+
+def unmount_usb_device(block_device: str):
+    """
+    Attempts to unmount a USB device via org.freedesktop.UDisks2.Filesystem D-Bus interface as described at
+    http://storaged.org/doc/udisks2-api/latest/gdbus-org.freedesktop.UDisks2.Filesystem.html#gdbus-method-org-freedesktop-UDisks2-Filesystem.Unmount.
+
+    :param block_device: a partition name to unmount, for example /dev/sdb1
+    """
+    if block_device is None:
+        raise TypeError("'block_device' cannot be of type 'NoneType'")
+    elif block_device == '':
+        raise ValueError("'block_device' cannot be empty")
+
+    path = block_device.replace('/dev', '/org/freedesktop/UDisks2/block_devices')
+    file_system_interface = QDBusInterface('org.freedesktop.UDisks2', path, 'org.freedesktop.UDisks2.Filesystem',
+                                           QDBusConnection.systemBus())
+    if not file_system_interface.isValid():
+        raise RuntimeError(_translate('DriveUtils', 'Invalid D-Bus interface'))
+
+    reply = file_system_interface.call('Unmount', {})
+
+    if reply.type() == QDBusMessage.ErrorMessage:
+        raise RuntimeError(reply.errorMessage())
+    elif reply.type() != QDBusMessage.ReplyMessage:
+        raise RuntimeError(_translate('DriveUtils', 'Unexpected reply from Udisks'))

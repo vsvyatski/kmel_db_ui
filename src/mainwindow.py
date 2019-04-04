@@ -15,6 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import asyncio
+import html
+import logging
 import os
 import subprocess
 import sys
@@ -56,7 +58,7 @@ class MainWindow(QMainWindow):
         model.clear()
         for drive_info in driveutils.get_fat_usb_mounts():
             item = QStandardItem(QIcon(':/images/usbFlash'), drive_info.label)
-            item.setData(drive_info.mount_point)
+            item.setData(drive_info)
             model.appendRow(item)
 
         drive_selected = False
@@ -71,6 +73,7 @@ class MainWindow(QMainWindow):
     def __changeActionAvailabilityBasedOnDriveSelection(self, drive_selected: bool):
         self.__ui.actionWriteDatabase.setEnabled(drive_selected)
         self.__ui.actionViewDatabase.setEnabled(drive_selected)
+        self.__ui.actionUnmount.setEnabled(drive_selected)
 
     @pyqtSlot()
     def refreshActionTriggered(self):
@@ -82,6 +85,14 @@ class MainWindow(QMainWindow):
         self.__changeActionAvailabilityBasedOnDriveSelection(not selected.isEmpty())
 
     def __getSelectedDriveMountPoint(self):
+        data = self.__getSelectedDriveData()
+        return data.mount_point if data is not None else None
+
+    def __getSelectedDriveDevice(self):
+        data = self.__getSelectedDriveData()
+        return data.device if data is not None else None
+
+    def __getSelectedDriveData(self):
         selection_model = self.__ui.driveList.selectionModel()
         if not selection_model.hasSelection():
             return None
@@ -98,11 +109,11 @@ class MainWindow(QMainWindow):
         # We are going to try several known file managers if they are available. If any of them cannot be found,
         # then we'll just use xdg-open (but this will not select the file).
         cmd_list = None
-        for file_manager in ['dolphin', 'nemo', 'nautilus']:
+        for file_manager in ['dolphin', 'nautilus', 'nemo', 'thunar']:
             path_to_file_manager = os.path.join('/usr/bin', file_manager)
             if os.access(path_to_file_manager, os.X_OK):
                 args = [path_to_file_manager, os.path.join(drive_mount_point, 'kenwood.dap')]
-                if file_manager == 'dolphin':
+                if file_manager == 'dolphin' or file_manager == 'nautilus':
                     args.insert(1, '--select')
                 cmd_list = args
                 break
@@ -201,9 +212,11 @@ class MainWindow(QMainWindow):
 
     def __uiBeginGenerateOperation(self):
         self.__ui.actionWriteDatabase.setEnabled(False)
+        self.__ui.actionUnmount.setEnabled(False)
 
     def __uiEndGenerateOperation(self):
         self.__ui.actionWriteDatabase.setEnabled(True)
+        self.__ui.actionUnmount.setEnabled(True)
 
     @pyqtSlot()
     def aboutActionTriggered(self):
@@ -225,8 +238,8 @@ class MainWindow(QMainWindow):
         super().closeEvent(event)
 
     @pyqtSlot()
-    def viewOnGithubActionTriggered(self):
-        if not QDesktopServices.openUrl(QUrl('https://github.com/vsvyatski/kmel_db_ui')):
+    def visitWebsiteActionTriggered(self):
+        if not QDesktopServices.openUrl(QUrl('https://vsvyatski.github.io/kmeldb-ui')):
             QMessageBox.critical(self, info.APP_NAME,
                                  _translate('MainWindow',
                                             'Unable to navigate to the Github repository with the default browser.'))
@@ -236,3 +249,17 @@ class MainWindow(QMainWindow):
         preferences_dialog = preferencesdialog.PreferencesDialog(self.__app_settings, self)
         if preferences_dialog.exec() == QDialog.Accepted:
             self.__ui.toolBar.setVisible(self.__app_settings.show_toolbar)
+
+    @pyqtSlot()
+    def unmountActionTriggered(self):
+        drive_device = self.__getSelectedDriveDevice()
+        try:
+            driveutils.unmount_usb_device(drive_device)
+            self.__loadUsbDrivesIntoView()
+        except RuntimeError as err:
+            QMessageBox.critical(self, info.APP_NAME,
+                                 _translate('MainWindow',
+                                            'Unable to unmount the device:<br/><br/><i>%s</i>') % html.escape(err))
+        except (TypeError, ValueError) as err:
+            logging.error(err)
+            QMessageBox.critical(self, info.APP_NAME, _translate('MainWindow', 'Internal error occurred.'))
