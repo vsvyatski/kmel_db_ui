@@ -1,0 +1,21 @@
+title: Kenwood Database Generator
+email: vsvyatski@yandex.ru
+description: > # this means to ignore newlines until "baseurl:"
+  Kenwood Database Generator is a replacement of the Windows application "Kenwood Music Editor Light" for Linux.
+baseurl: "/kmeldb-ui"
+url: "https://vsvyatski.github.io"
+
+# Social
+githubUsername: vsvyatski
+
+# Build settings
+markdown: kramdown
+
+themeColor: green # green, blue, orange, purple, grey
+fixedNav: 'true' # true or false
+
+permalink: /:year/:month/:title
+include: [_pages]
+exclude: [_site, CHANGELOG.md, LICENSE, README.md, run.sh]
+sass:
+  style: compressed
