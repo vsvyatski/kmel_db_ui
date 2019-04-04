@@ -258,7 +258,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout"/>
-    <addaction name="actionViewOnGithub"/>
+    <addaction name="actionVisitWebsite"/>
    </widget>
    <addaction name="menuDrive"/>
    <addaction name="menuEdit"/>
@@ -374,15 +374,15 @@
     <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
-  <action name="actionViewOnGithub">
+  <action name="actionVisitWebsite">
    <property name="text">
-    <string>&amp;View Repository on Github</string>
+    <string>&amp;Visit Website</string>
    </property>
    <property name="iconText">
-    <string>View on Github</string>
+    <string>Website</string>
    </property>
    <property name="toolTip">
-    <string>View repository on Github</string>
+    <string>Open program website with your browser</string>
    </property>
   </action>
   <action name="actionUnmount">
@@ -518,10 +518,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionViewOnGithub</sender>
+   <sender>actionVisitWebsite</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>viewOnGithubActionTriggered()</slot>
+   <slot>visitWebsiteActionTriggered()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -573,7 +573,7 @@
   <slot>clearLogActionTriggered()</slot>
   <slot>writeDatabaseActionTriggered()</slot>
   <slot>aboutActionTriggered()</slot>
-  <slot>viewOnGithubActionTriggered()</slot>
+  <slot>visitWebsiteActionTriggered()</slot>
   <slot>preferencesActionTriggered()</slot>
   <slot>unmountActionTriggered()</slot>
  </slots>
