@@ -1,8 +1,13 @@
 ---
 layout: page
-title: Articles
-permalink: /articles/
+title: News
+permalink: /news/
 ---
+<span>
+    <i class="material-icons" style="vertical-align: middle">rss_feed</i>
+    <a href='{{ "/feed.xml" | prepend: site.baseurl }}' style="vertical-align: middle">Subscribe</a>
+</span>
+<br/>
 {% for post in site.posts  %}
     {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
     {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
