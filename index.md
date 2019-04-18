@@ -2,20 +2,22 @@
 layout: page
 title: Kenwood Database Generator
 ---
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis [nostrud exercitation](http://alexcarpenter.me) ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Kenwood Database Generator is a replacement of Kenwood Music Editor Light for Linux. Basically it represents a graphic shell for [kmel_db command line utility](https://github.com/chrrrisw/kmel_db) created by Chris Willoughby.
 
-## Heading Level 2
+## Purpose
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+It takes a FAT32 formatted USB drive with MP3 and WMA files and then creates a Kenwood DAP database on that drive, containing info about those files. The database can be later accessed by Kenwood Car Audio to index and play audio files. I created this application because the original Kenwood Music Editor light doesn't exist for Linux.
 
-{% highlight scss %}
-  .header {
-    font-size: 100px;
-  }
-{% endhighlight %}
+## Requirements
 
-### Heading Level 3
+The application requires Python 3.5 or newer. Among packages it needs [PyQt5](https://pypi.org/project/PyQt5/), [asyncqt](https://pypi.org/project/asyncqt/) and [hsaudiotag3k](https://pypi.org/project/hsaudiotag3k/).
 
-> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+## Manual installation
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+If you choose to use tar.gz archive (because, for instance, you posess a Linux distribution using a package manager that do not understand Debian or ArchLinux packages), then you need to perform an additional step after unpacking the archive. There will be the *create-venv.sh* file in your destination folder. It needs to be laucned before the first use of the program in order to generate a Python virtual environment in the destination folder. The virtual environment is needed to run the application. The distribution archive contains the *kenwooddbgen.sh* file. It's the program's launcher. Just emit the following command in your terminal:
+
+```bash
+sh kenwooddbgen.sh
+```
+
+But an easier way would be to just create a shortcut on the desktop or in a menu somewhere for the aforementioned command.
