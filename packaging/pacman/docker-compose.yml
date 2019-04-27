@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  pacman_package:
+    build:
+      context: ../..
+      dockerfile: packaging/pacman/Dockerfile
+    command: sh build.sh -p pacman
+    volumes:
+      - ../../dist:/home/builder/kmeldb-ui/dist
+    working_dir: /home/builder/kmeldb-ui

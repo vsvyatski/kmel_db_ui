@@ -13,9 +13,11 @@ esac
 if [ ${isBash} = true ]
 then
 	clr_red=$'\e[1;31m'
+    clr_yellow=$'\e[1;33m'
 	clr_end=$'\e[0m'
 else
 	clr_red=''
+    clr_yellow=''
 	clr_end=''
 fi
 
@@ -67,6 +69,15 @@ while getopts ":p:h" opt; do
 done
 
 thisScriptDir=$(realpath $(dirname "$0"))
+
+if [ "$packageFormat" = pacman ] && [ ! -f /usr/bin/makepkg ]
+then
+    printf "${clr_yellow}WARNING: makepkg is missing. Pacman is most likely not the package manager of this system. The build will be delegated to Docker.${clr_end}\n"
+    cd "$thisScriptDir/packaging/pacman"
+    docker-compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) pacman_package
+    docker-compose run pacman_package
+    exit 0
+fi
 
 outDir="$thisScriptDir/dist/kmeldb-ui"
 srcDir="$thisScriptDir/src"
@@ -125,25 +136,6 @@ then
     cd -
 elif [ "$packageFormat" = pacman ]
 then
-    # NOTE: fpm currently has a bug with --pacman-optional-depends, therefore makepkg is used.
-
-#     pacmanTmpDir=$(mktemp -d)
-#     mkdir "$pacmanTmpDir/opt" && cp -r "$outDir" "$pacmanTmpDir/opt"
-#     mkdir -p "$pacmanTmpDir/usr/share/applications/" && cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$pacmanTmpDir/usr/share/applications"
-#     
-#     packageDescription="Kenwood Music Editor Light replacement for Linux systems"
-#     # Let's define this explicitely, it seems to be important for Pacman (otherwise fpm will implicitely set this to 1)
-#     iteration=1
-# 
-#     cd "$pacmanTmpDir"
-# 
-#     fpm -f -s dir -t pacman -p "$outDir/../kmeldb-ui-${appVersion}-${iteration}-any.pkg.tar.xz" -n kmeldb-ui -v ${appVersion} -m "$packageMaintainer" \
-#     --license GPL3 -a all --url https://github.com/vsvyatski/kmeldb-ui --description "$packageDescription" --iteration $iteration \
-#     -d python-pyqt5 --pacman-optional-depends qt5-translations \
-#     --after-install "$thisScriptDir/packaging/after-install.sh" --after-remove "$thisScriptDir/packaging/after-remove.sh" .
-#     
-#     cd -
-
     cd "$thisScriptDir/packaging/pacman"
     makepkg -f PACKAGER="$packageMaintainer" APPOUTDIR="$outDir" PROJROOTDIR="$thisScriptDir" APPVERSION="$appVersion" BUILDDIR="$thisScriptDir/out" PKGDEST="$thisScriptDir/dist"
     cd -
