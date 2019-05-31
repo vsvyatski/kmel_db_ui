@@ -22,3 +22,4 @@ Arch Linux and Manjaro users can download the following [package](https://github
 ```bash
 sudo pacman -U kmeldb-ui-0.4.0-1-any.pkg.tar.xz
 ```
+An [AUR repository](https://aur.archlinux.org/packages/kmeldb-ui) is also available.
